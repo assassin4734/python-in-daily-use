@@ -30,10 +30,25 @@ def fluent_boundary(case, inlet, scale, mf_rate, nozzles):
         # 改水力直径
         inlet_length = 96*scale*0.001
         case.solver.root.setup.boundary_conditions.mass_flow_inlet[id].turb_hydraulic_diam=inlet_length
+    # 改墙
     if nozzles == '3nozzle':
-        case.solver.tui.file.read_journal(file_name=nozzle3_journal)
+        case.solver.root.setup.boundary_conditions.mass_flow_inlet['inlet-2'].fmean={
+        "option": "constant or expression",
+        "constant": 0,
+    }
+        case.solver.root.setup.boundary_conditions.mass_flow_inlet['inlet-4'].fmean={
+        "option": "constant or expression",
+        "constant": 0,
+    }
     elif nozzles == '1nozzle':
-        case.solver.tui.file.read_journal(file_name=nozzle1_journal)
+        i = 1
+        while i < 5:
+            inl = 'inlet-' + str(i)
+            case.solver.root.setup.boundary_conditions.mass_flow_inlet[inl].fmean={
+        "option": "constant or expression",
+        "constant": 0,
+    }
+            i += 1
     else:
         pass
     # 改出口边界条件
@@ -50,7 +65,6 @@ def fluent_boundary(case, inlet, scale, mf_rate, nozzles):
 
 
 def fluent_failed():
-    # 如果计算发生错误就结束所有fluent进程防止占内存
     session_list = psutil.pids()
     killed_process = []
     for i in session_list:
@@ -89,8 +103,6 @@ if __name__ == "__main__":
     massflow_folder = [0.35, 0.25515, 0.1792, 0.12005, 0.0756, 0.04375, 0.03189375, 0.01500625, 0.00546875, 0.0028]
     patch_journal = 'G:\\Assassin\\5nozzle-DLN2.6SIZE\\patch_log.txt'
     ini_journal = 'G:\\Assassin\\5nozzle-DLN2.6SIZE\\ini_log.txt'
-    nozzle3_journal = 'G:\\Assassin\\5nozzle-DLN2.6SIZE\\3nozzle-wall.txt'
-    nozzle1_journal = 'G:\\Assassin\\5nozzle-DLN2.6SIZE\\1nozzle-wall.txt'
     # 定义计算根目录
     dir = 'G:\\Assassin\\5nozzle-DLN2.6SIZE\\'
     # 定义未成功计算的目录集合
@@ -106,11 +118,13 @@ if __name__ == "__main__":
             for num in range(len(scale_factor)):
                 str_factors = str(scale_factor[num])
                 dir_working = dir_fluent + '\\' + folders + '-' + str_factors
+                print('----------------------------------------------')
                 print(dir_working + ' is under calculatiing')
+                print('----------------------------------------------')
                 # 如果已经计算完成就略过
                 if os.path.lexists(dir_working + '\\' + folders + '-' + str_factors + ".cas.h5") == False:
                     # 定义fluent进程
-                    session = pyFluent.launch_fluent(meshing_mode = False,version='3d',precision='double', show_gui=False, processor_count=23)
+                    session = pyFluent.launch_fluent(meshing_mode = False,version='3d',precision='double', show_gui=True, processor_count=23)
                     try:
                     # 读取case文件
                         session.solver.tui.file.read_case_data(file_name = dir_fluent + '\\' + folders + '-1.cas.h5')
