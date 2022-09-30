@@ -1,7 +1,7 @@
+# -*- encoding utf-8 -*-
+
 import originpro as op
 import sys
-
-
 
 
 def origin_shutdown_exception_hook(exctype, value, traceback):
