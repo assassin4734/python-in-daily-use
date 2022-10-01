@@ -2,19 +2,24 @@
 # 将想要的数据归到一个工作表里并保存
 
 import xlwings as xw
- 
+import os
+
 
 def choosing():
     print(head_dic)
+    print("输入exit退出")
     action_str = input("选择想要的物理量：")
-    action_str_int = int(action_str)
-    if action_str_int in head_list:
-        return action_str_int
-    else:
-        print("输入错误，请重新输入")
+    try:    
+        if int(action_str) in head_list:
+            return int(action_str)
+        else:
+            print("编号输入错误，请重新输入")
+            choosing()
+    except:
+        if action_str == 'exit':
+            os._exit(0)
+        print("编号输入错误，请重新输入")
         choosing()
-
-
 
 
 # 定义出编号的个数，用于判断物理量以及字典的key
@@ -28,19 +33,14 @@ sht_head = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N'
 # 把编号和列号对应以便于自动输出
 sht_dic = dict(zip(head_list, sht_head))
 # 输入物理量，容错
-try:
-    print(head_dic)
-    action_str_int = choosing()
-except:
-    print("\n输入错误, 请重新输入")
-    action_str_int = choosing()
+action_str_int = choosing()
 # 定义文件目录
 eq_folder = ["eq=0.55", "eq=0.65", "eq=0.75", "eq=0.85", "eq=0.95"]
 scale_factor = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
 # 定义统计物理量的目录以及建立统计表
 for folders in eq_folder:
-    str_folders = str(folders)
-    dir_colletion = 'F:\\PhD\\1 nozzle\\eq\\postprocessing\\' + str_folders
+    # 地址格式举例：F:\\PhD\\1 nozzle\\eq\\postprocessing\\eq=0.55
+    dir_colletion = 'F:\\PhD\\1 nozzle\\eq\\postprocessing\\' + folders
     print(dir_colletion + ' is on processing')
     app_col = xw.App(visible=True, add_book=False)
     wb_collection = app_col.books.add()
@@ -52,7 +52,7 @@ for folders in eq_folder:
         factors = scale_factor[num]
         str_factors = str(factors)  
         dir_position = dir_colletion + '\\' + '40.5-' + str_factors
-        print(str_folders + '-' + str_factors + ' is on going')
+        print(dir_position + ' is on going')
         app_ori = xw.App(visible=False, add_book=False)
         wb_ori = app_ori.books.open(dir_position+ '/' + "数值模拟结果整理.xls")
         num_inverse = 9-num
@@ -73,7 +73,7 @@ for folders in eq_folder:
             sht_col.range(total).options(transpose=True).value = my_data
         app_ori.quit()
 # 保存文件
-    wb_collection.save(dir_colletion+ '/' + 'z-' + str_folders + '-' + head_dic[action_str_int] + ".xlsx")
+    wb_collection.save(dir_colletion+ '/' + 'z-' + folders + '-' + head_dic[action_str_int] + ".xlsx")
     app_col.quit()
 
 input("all done")
