@@ -34,7 +34,9 @@ def change(current_file):
             item = text_line_convert[rank]
             sheet.write(row, rank, item)            # 将元素写入表单
         row += 1        # 循环内计数器加一，转到下一行
+    
     txt0_file.close()    # 关闭当前的txt文件
+    # 添加表头
     line_head = ("CoordinateX", "CoordinateY", "CoordinateZ", "ch2o", "Turbulent Energy Dissipation", "turbulent-flame-speed", "X Component Vorticity", "Temperature", "Y Component Vorticity", "stretch-fac", "helicity", "Z Component Vorticity", "oh", "X Component Velocity", "Pressure", "Y Component Velocity", "Turbulent Kinetic Energy", "fmean", "Z Component Velocity", "premixc", "damkohler-number", "Magnitude Vorticity", "turb-intensity", "heat-release-rate", "Magnitude Velocity", "q-criterion", "raw-q-criterion", "无量纲Z", "无量纲Y", "轴向速度", "径向速度")
     for elements in range(len(line_head)):
         head = line_head[elements]
@@ -49,38 +51,46 @@ def find_txt(current_file):
     :return:包含txt文件的列表
     """
     txt_list = []    # 用列表储存txt文件的路径
+    xls_list= []
     for names in current_file:    # 用变量存放文件地址，即文件夹名字加文件名称
-        find = re.search(".txt", names, re.I)        # 正则表达式判断当前目录下是否有txt文件
-        if find:
-            txt_list.append(names)
+        if re.search("数值模拟结果整理.xls", names, re.I):
+            xls_list.append(names)
+            break
+        if xls_list == []:
+            find = re.search(".txt", names, re.I)        # 正则表达式判断当前目录下是否有txt文件
+            if find:
+                if re.search("POSITION", names, re.I):
+                    txt_list.append(names)
+                else:
+                    continue
+        else:
+            print("all data had been transferred")
     numbers_of_txt_in = len(txt_list)
     return txt_list, numbers_of_txt_in
 
 
-file_folder = [28.5, 35.5, 40.5, 45.5, 52.5]
+eq_folder = ["eq=0.55", "eq=0.65", "eq=0.75", "eq=0.85", "eq=0.95"]
 scale_factor = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
-
-for folders in file_folder:
-  for factors in scale_factor:
-
-    str_folders = str(folders)
-    str_factors = str(factors)
-    
-
-    global dir_position
-    dir_position = 'F:\\PhD\\1 nozzle\\different swirl number\\postprocessing\\z-' + str_folders + '\\' + str_folders + '-' + str_factors
-    print(str_folders + '-' + str_factors + ' is on going')
-    print(dir_position)
-    
-    file_names = os.listdir(dir_position)   # 列举目录下文件
-    txt_file_and_numbers = find_txt(file_names)
-    txt_file = txt_file_and_numbers[0]
-    numbers_of_txt = txt_file_and_numbers[1]
-    if txt_file:    # 进行处理
-        xls = xlwt.Workbook()  # 建立一个工作表
-        for files in txt_file:
-            change(files)
-        number_convert = len(txt_file)
-        print("\n转换完毕！共转换了%d个文件" % number_convert)
+# 建立工作目录
+for folders in eq_folder:
+    # 地址格式举例：F:\\PhD\\1 nozzle\\eq\\postprocessing\\eq=0.55
+    dir_colletion = 'F:\\PhD\\1 nozzle\\eq\\postprocessing\\' + folders
+    print(dir_colletion + ' is on processing')
+    for factors in scale_factor:
+        str_factors = str(factors)
+        global dir_position
+        # 地址格式举例：F:\\PhD\\1 nozzle\\eq\\postprocessing\\eq=0.55\\40.5-1
+        dir_position = dir_colletion + '\\' + '40.5-' + str_factors
+        print(dir_position + ' is on going')        
+        file_names = os.listdir(dir_position)   # 列举目录下文件
+        txt_file_and_numbers = find_txt(file_names)
+        txt_file = txt_file_and_numbers[0]
+        numbers_of_txt = txt_file_and_numbers[1]
+        if txt_file:    # 进行处理
+            xls = xlwt.Workbook()  # 建立一个工作表
+            for files in txt_file:
+                change(files)
+            number_convert = len(txt_file)
+            print("\n转换完毕！共转换了%d个文件" % number_convert)
 
 input("输入回车退出")
