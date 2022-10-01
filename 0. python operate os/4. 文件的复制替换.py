@@ -2,8 +2,6 @@
 
 import shutil
 
-
-
 def copyFile(src, dest):
     try:
         shutil.copy(src, dest)
@@ -13,8 +11,6 @@ def copyFile(src, dest):
     # eg. source or destination doesn't exist
     except IOError as e:
          print('Error: %s' % e.strerror)
-
-
 
 
 template_folder = [28.5, 35.5, 40.5, 45.5, 52.5]
