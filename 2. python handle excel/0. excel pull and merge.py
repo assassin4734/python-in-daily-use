@@ -73,7 +73,7 @@ for folders in eq_folder:
             sht_col.range(total).options(transpose=True).value = my_data
         app_ori.quit()
 # 保存文件
-    wb_collection.save(dir_colletion+ '/' + 'z-' + folders + '-' + head_dic[action_str_int] + ".xlsx")
+    wb_collection.save(dir_colletion+ '\\' + head_dic[action_str_int] + ".xlsx")
     app_col.quit()
 
 input("all done")
