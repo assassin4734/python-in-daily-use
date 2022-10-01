@@ -15,13 +15,13 @@ for folders in eq_folder:
     for factors in scale_factor:
         str_factors = str(factors)
         # 地址格式举例：F:\\PhD\\1 nozzle\\eq\\postprocessing\\eq=0.55\\40.5-1
-        dir_positiion = dir_colletion + '\\40.5-' + str_factors
+        dir_position = dir_colletion + '\\40.5-' + str_factors
         for lays in layouts:
             # 地址格式举例：F:\\PhD\\1 nozzle\\eq\\postprocessing\\eq=0.55\\40.5-1\\z-28.5-1-velocity.lay
-            dir_final = dir_positiion + '\\z-28.5-1' + lays
+            dir_final = dir_position + '\\z-28.5-1' + lays
             print(dir_final + ' is on going')
             photo_name = lays.strip('z-28.5-1-').replace('.lay','')
-            dir_save = dir_positiion + '\\' + photo_name + '.tiff'
+            dir_save = dir_position + '\\' + photo_name + '.tiff'
             tp.macro.execute_command('$!RedrawAll')
             tp.load_layout(dir_final)
             tp.export.save_tiff(dir_save,
