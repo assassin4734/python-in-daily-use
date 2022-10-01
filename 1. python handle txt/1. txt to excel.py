@@ -56,15 +56,15 @@ def find_txt(current_file):
         if re.search("数值模拟结果整理.xls", names, re.I):
             xls_list.append(names)
             break
-        if xls_list == []:
-            find = re.search(".txt", names, re.I)        # 正则表达式判断当前目录下是否有txt文件
-            if find:
-                if re.search("POSITION", names, re.I):
-                    txt_list.append(names)
-                else:
-                    continue
-        else:
-            print("all data had been transferred")
+    if xls_list == []:
+        find = re.search(".txt", names, re.I)        # 正则表达式判断当前目录下是否有txt文件
+        if find:
+            if re.search("POSITION", names, re.I):
+                txt_list.append(names)
+            else:
+                pass
+    else:
+        print("all data had been transferred")
     numbers_of_txt_in = len(txt_list)
     return txt_list, numbers_of_txt_in
 
