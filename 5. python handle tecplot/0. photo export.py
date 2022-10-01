@@ -3,8 +3,6 @@ from tecplot.exception import *
 from tecplot.constant import *
 
 
-
-
 tp.session.connect(port=7600)
 # 定义目录
 eq_folder = ["eq=0.55", "eq=0.65", "eq=0.75", "eq=0.85", "eq=0.95"]
