@@ -3,58 +3,56 @@
 '''
 1. 将数值模拟得到的图片插入PPT中
 2. 按图片类型插入到PPT的不同页上
-3. 处理的是变当量比模化算例
+3. 用win32api模块重写
 '''
 
 
-from pptx import Presentation, util
+import win32com.client as client
 
 
 # 实例化一个ppt演示文稿
-prs = Presentation("数值模拟处理.pptx")
+PPT = client.GetActiveObject("Powerpoint.Application")
+PPTPres = PPT.ActivePresentation
+print("共有" + str(len(PPTPres.Slides)) + "张slide")
+# 定义磅值与厘米的换算基准
+unit_point = 0.03527
+# 定义目录
 eq_folder = ["eq=0.55", "eq=0.65", "eq=0.75", "eq=0.85", "eq=0.95"]
-scale_factor = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
+scale_factor = [1, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2]
 photos = input("请输入图片名称（带扩展名）")
 # 定义图片大小（也通过它来定义位置）
-ph_width = 3.17
+print('火焰结构和反应区的图片宽度是3.17厘米，速度分布的图片宽度是7厘米')
+ph_width = float(input('输入图片宽度：'))
 ph_height = 3.74
 #定义PPT的页数
 i = int(input("请输入PPT的起始页码（0为首张）"))
 # 定义换行图片数
 j = int(input("请输入换行图片数（整数）"))
-# 横向的起始位置, 放在file_folder的循环里就是另一页开始
-x_position = 9.51
-# 纵向的起始位置, 放在file_folder的循环里就是另一页开始
-y_position = 0
 for folders in eq_folder:
-# 获取目录
-    str_folders = str(folders)
-    dir_colletion = 'F:\\PhD\\1 nozzle\\re\\postprocessing\\z-' + str_folders
-    print(str_folders + ' is on processing')
-# 定位PPT
-    slide = prs.slides[i]
-    # 是否另起slide插入
-    # i += 1
-# 定义二级目录
+    # 地址格式举例：F:\\PhD\\1 nozzle\\eq\\postprocessing\\eq=0.55
+    dir_colletion = 'F:\\PhD\\1 nozzle\\eq\\postprocessing\\' + folders
+    print(dir_colletion + ' is on processing')
+    # 横向的起始位置
+    x_position = 0
+    # 纵向的起始位置
+    y_position = 0
     for num in range(len(scale_factor)):
         factors = scale_factor[num]
-        str_factors = str(factors)  
-        dir_position = 'F:\\PhD\\1 nozzle\\re\\postprocessing\\z-' + str_folders + '\\' + str_folders + '-' + str_factors
-        print(str_folders + '-' + str_factors + ' is on going')
-# 找到想插入的图片
+        str_factors = str(factors) 
+        # 地址格式举例：F:\\PhD\\1 nozzle\\eq\\postprocessing\\eq=0.55\\40.5-1
+        dir_position = dir_colletion + '\\40.5-' + str_factors
+        print(dir_position + ' is on going')
         photo_position = dir_position + '\\' + photos
         print(photo_position)
-        image = slide.shapes.add_picture(
-        image_file=photo_position,
-        left=util.Cm(x_position),
-        top=util.Cm(y_position),
-        width=util.Cm(ph_width),
-        height=util.Cm(ph_height)
-        )
-        x_position += ph_width
+        # 插入图片
+        image = PPTPres.Slides[i].Shapes.AddPicture(FileName=photo_position, LinkToFile=False,
+                                                    SaveWithDocument=True, Left=x_position, Top=y_position,
+                                                    Width=ph_width/unit_point, Height=ph_height/unit_point)
+        x_position += ph_width/unit_point
 # 图片换行
         if (num+1) % j == 0:
-            x_position = 9.51
-            y_position += ph_height
-prs.save("F:\\PhD\\1 nozzle\\数值模拟处理-改图.pptx")
+            x_position = 0
+            y_position += ph_height/unit_point
+    # 换页
+    i += 1
 print("all done")
