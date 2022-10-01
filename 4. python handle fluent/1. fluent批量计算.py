@@ -30,7 +30,7 @@ def fluent_boundary(case, inlet, scale, mf_rate, nozzles):
         # 改水力直径
         inlet_length = 96*scale*0.001
         case.solver.root.setup.boundary_conditions.mass_flow_inlet[id].turb_hydraulic_diam=inlet_length
-    # 改墙
+    # 改进口的混合分数
     if nozzles == '3nozzle':
         case.solver.root.setup.boundary_conditions.mass_flow_inlet['inlet-2'].fmean={
         "option": "constant or expression",
