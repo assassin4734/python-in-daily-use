@@ -29,6 +29,7 @@ sht_head = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N'
 sht_dic = dict(zip(head_list, sht_head))
 # 输入物理量，容错
 try:
+    print(head_dic)
     action_str_int = choosing()
 except:
     print("\n输入错误, 请重新输入")
@@ -50,7 +51,7 @@ for folders in eq_folder:
     for num in range(len(scale_factor)):
         factors = scale_factor[num]
         str_factors = str(factors)  
-        dir_position = 'F:\\PhD\\1 nozzle\\eq\\postprocessing\\' + str_folders + '\\' + '40.5-' + str_factors
+        dir_position = dir_colletion + '\\' + '40.5-' + str_factors
         print(str_folders + '-' + str_factors + ' is on going')
         app_ori = xw.App(visible=False, add_book=False)
         wb_ori = app_ori.books.open(dir_position+ '/' + "数值模拟结果整理.xls")
