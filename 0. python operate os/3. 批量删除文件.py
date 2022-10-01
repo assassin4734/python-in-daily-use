@@ -20,19 +20,22 @@ def find_files(current_file):
 
 
 del_subname = str(input("想要删除文件的扩展名:"))
-file_folder = [28.5, 35.5, 40.5, 45.5, 52.5]
+eq_folder = ["eq=0.55", "eq=0.65", "eq=0.75", "eq=0.85", "eq=0.95"]
 scale_factor = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1] 
-for folders in file_folder:
-  for factors in scale_factor:
-    str_folders = str(folders)
-    str_factors = str(factors)
-    dir_import = 'F:\\PhD\\1 nozzle\\different swirl number\\postprocessing\\z-' + str_folders + '\\' + str_folders + '-' + str_factors
-    print(str_folders + "-" + str_factors + ' is on going')
-    file_names = os.listdir(dir_import)
-    files_del = find_files(file_names)
-    print(files_del[0])
-    for fil_del in files_del[0]:
-        os.remove(dir_import + "\\" + fil_del)
+for folders in eq_folder:
+    # 地址格式举例：F:\\PhD\\1 nozzle\\eq\\postprocessing\\eq=0.55
+    dir_colletion = 'F:\\PhD\\1 nozzle\\eq\\postprocessing\\' + folders
+    print(dir_colletion + ' is on processing')
+    for factors in scale_factor:
+        str_factors = str(factors)
+        # 地址格式举例：F:\\PhD\\1 nozzle\\eq\\postprocessing\\eq=0.55\\40.5-1
+        dir_position = dir_colletion + '\\40.5-' + str_factors
+        print(dir_position + ' is on going')
+        file_names = os.listdir(dir_position)
+        files_del = find_files(file_names)
+        print(files_del[0])
+        for fil_del in files_del[0]:
+            os.remove(dir_position + "\\" + fil_del)
 input("all done")
 
 
