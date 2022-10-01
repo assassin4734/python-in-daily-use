@@ -3,8 +3,6 @@
 import win32com.client as client
 
 
-
-
 PPT = client.GetActiveObject("Powerpoint.Application")
 PPTPres = PPT.ActivePresentation
 print("共有" + str(len(PPTPres.Slides)) + "张slide")
