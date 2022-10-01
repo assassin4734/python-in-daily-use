@@ -1,5 +1,8 @@
-# _*_ encoding utf-8 _*_
-# 将想要的数据归到一个工作表里并保存
+# -*- encoding utf-8 -*-
+'''
+将想要的数据归到一个工作表里并保存
+'''
+
 
 import xlwings as xw
 import os
