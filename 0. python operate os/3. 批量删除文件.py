@@ -3,6 +3,7 @@
 import re
 import os
 
+
 def find_files(current_file):
     """
     采用正则表达式判断当前目录下是否有指定文件，并进行筛选
@@ -16,7 +17,6 @@ def find_files(current_file):
             file_list.append(names)
     numbers_of_files = len(file_list)
     return file_list, numbers_of_files
-
 
 
 del_subname = str(input("想要删除文件的扩展名:"))
