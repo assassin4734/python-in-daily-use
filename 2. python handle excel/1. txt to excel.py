@@ -6,8 +6,6 @@ import xlwt
 import re
 
 
-
-
 def change(current_file):
     """
     将指定文件夹目录下的txt转化为xls
@@ -56,14 +54,17 @@ def find_txt(current_file):
     for names in current_file:    # 用变量存放文件地址，即文件夹名字加文件名称
         find = re.search(".txt", names, re.I)        # 正则表达式判断当前目录下是否有txt文件
         if find:
-            if re.search("40.5", names, re.I) == False:
+            if re.search("POSITION", names, re.I):
                 txt_list.append(names)
+            else:
+                continue
     numbers_of_txt_in = len(txt_list)
     return txt_list, numbers_of_txt_in
 
+
 eq_folder = ["eq=0.55", "eq=0.65", "eq=0.75", "eq=0.85", "eq=0.95"]
 scale_factor = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
-
+# 建立工作目录
 for folders in eq_folder:
     # 地址格式举例：F:\\PhD\\1 nozzle\\eq\\postprocessing\\eq=0.55
     dir_colletion = 'F:\\PhD\\1 nozzle\\eq\\postprocessing\\' + folders
