@@ -6,8 +6,6 @@ import xlwt
 import re
 
 
-
-
 def change(current_file):
     """
     将指定文件夹目录下的txt转化为xls
@@ -36,9 +34,7 @@ def change(current_file):
             item = text_line_convert[rank]
             sheet.write(row, rank, item)            # 将元素写入表单
         row += 1        # 循环内计数器加一，转到下一行
-    
     txt0_file.close()    # 关闭当前的txt文件
-
     line_head = ("CoordinateX", "CoordinateY", "CoordinateZ", "ch2o", "Turbulent Energy Dissipation", "turbulent-flame-speed", "X Component Vorticity", "Temperature", "Y Component Vorticity", "stretch-fac", "helicity", "Z Component Vorticity", "oh", "X Component Velocity", "Pressure", "Y Component Velocity", "Turbulent Kinetic Energy", "fmean", "Z Component Velocity", "premixc", "damkohler-number", "Magnitude Vorticity", "turb-intensity", "heat-release-rate", "Magnitude Velocity", "q-criterion", "raw-q-criterion", "无量纲Z", "无量纲Y", "轴向速度", "径向速度")
     for elements in range(len(line_head)):
         head = line_head[elements]
@@ -59,6 +55,7 @@ def find_txt(current_file):
             txt_list.append(names)
     numbers_of_txt_in = len(txt_list)
     return txt_list, numbers_of_txt_in
+
 
 file_folder = [28.5, 35.5, 40.5, 45.5, 52.5]
 scale_factor = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
