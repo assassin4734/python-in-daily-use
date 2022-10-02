@@ -34,6 +34,8 @@ for folders in eq_folder:
         newname = portion[0] + ".mcr"
         os.rename(file_dir, newname)
         file_dir2 = dir_position + "\\export.mcr"
+        dir_layout = dir_position + "\\z-28.5-1-velocity.lay"
+        tp.load_layout(dir_layout)
         tp.macro.execute_file(file_dir2)
         print(dir_position + ' has done')
 input("all done, press enter to exit")
