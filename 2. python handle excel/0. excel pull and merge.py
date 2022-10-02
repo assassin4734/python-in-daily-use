@@ -68,7 +68,6 @@ for folders in eq_folder:
             end = sht_dic[action_str_int] + '201'
             total = start + ':' + end
             my_data = sht_ori.range(total).value
-            print(my_data)
 # 定义导出数据的范围
             start = sht_dic[num_inverse] + '1'
             end = sht_dic[num_inverse] + '201'
