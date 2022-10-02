@@ -18,12 +18,13 @@ print("共有" + str(len(PPTPres.Slides)) + "张slide")
 unit_point = 0.03527
 # 定义目录
 eq_folder = ["eq=0.55", "eq=0.65", "eq=0.75", "eq=0.85", "eq=0.95"]
-scale_factor = [1, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2]
+scale_factor = [1, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1]
 photos = input("请输入图片名称（带扩展名）")
 # 定义图片大小（也通过它来定义位置）
-print('火焰结构和反应区的图片宽度是3.17厘米，速度分布的图片宽度是7厘米')
+print('火焰结构和反应区的图片宽度是3.28厘米，速度分布的图片宽度是7厘米')
 ph_width = float(input('输入图片宽度：'))
-ph_height = 3.74
+print('火焰结构和反应区的图片高度是3.87厘米，速度分布的图片高度是3.87厘米')
+ph_height = float(input('输入图片高度：'))
 #定义PPT的页数
 i = int(input("请输入PPT的起始页码（0为首张）"))
 # 定义换行图片数
@@ -55,4 +56,4 @@ for folders in eq_folder:
             y_position += ph_height/unit_point
     # 换页
     i += 1
-print("all done")
+input("all done, press enter to exit")
