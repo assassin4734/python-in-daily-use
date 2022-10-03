@@ -19,6 +19,6 @@ for folders in nozzles_folder:
         for num in range(len(scale_factor)):
             str_factors = str(scale_factor[num]) 
             # E:\\0-PhD\\5 nozzle\\5nozzle-DLN2.6SIZE\\postprocessing\\5nozzle\\48\\48-1
-            dir_scale = dir_nozzles + '\\' + distance + '-' + str_factors
+            dir_scale = dir_distance + '\\' + distance + '-' + str_factors
             print(dir_scale + ' is on going')
             os.makedirs(dir_scale)
