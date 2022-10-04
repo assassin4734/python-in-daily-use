@@ -11,13 +11,11 @@ scale_factor = [1, 0.9, 0.8, 0.7, 0.6, 0.45, 0.4, 0.35, 0.3, 0.25]
 for nozzles in nozzles_folder:
     # E:\\0-PhD\\5 nozzle\\5nozzle-DLN2.6SIZE\\5nozzle
     dir_fluent_nozzles = 'E:\\0-PhD\\5 nozzle\\5nozzle-DLN2.6SIZE\\' + nozzles
-    dir_post_nozzles = 'E:\\0-PhD\\5 nozzle\\5nozzle-DLN2.6SIZE\\postprocessing\\' + nozzles
     print(dir_fluent_nozzles + ' is on processing')
     # 定义二级目录
     for distance in distance_folder:
         # E:\\0-PhD\\5 nozzle\\5nozzle-DLN2.6SIZE\\5nozzle\\48
         dir_fluent_distance = dir_fluent_nozzles + '\\' + distance
-        dir_post_distance = dir_post_nozzles + '\\' + distance
         # 定义三级目录
         for num in range(len(scale_factor)):
             factors = scale_factor[num]
