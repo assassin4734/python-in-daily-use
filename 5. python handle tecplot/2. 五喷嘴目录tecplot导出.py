@@ -40,5 +40,3 @@ for nozzles in nozzles_folder:
                     print(dir_tec + ' error')
                     continue
 input("all done")
-
-
