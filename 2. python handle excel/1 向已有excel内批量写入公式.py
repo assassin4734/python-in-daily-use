@@ -1,6 +1,3 @@
-import imp
-
-
 # -*- encoding utf-8 -*-
 '''
 向已有的excel表中写入公式
