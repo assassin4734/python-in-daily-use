@@ -95,7 +95,7 @@ for nozzles in nozzles_folder:
             # 日志的保存路径
             journal_place = dir_post_distance + '\\' + distance + '-' + str_factors + '\\' + distance + '-' + str_factors + '.txt'
             # plt的保存路径
-            tecplot_place = dir_post_distance + '\\' + distance + '-' + str_factors + '\\' + distance + '-' + str_factors
+            tecplot_place = dir_post_distance + '\\' + distance + '-' + str_factors + '\\28.5-1'
             print(journal_place + ' is on going')
             # 已经处理好的就跳过
             if os.path.lexists(tecplot_place + ".plt") == False:

@@ -23,10 +23,14 @@ for sw in sws:
             if data == 'turbulent-flame-speed':
                 j = 12
             k = j + 10
+            l = 2
             while j < k:
                 sht.range((203,j)).value = '=MAX(' + col[j-1] + '2:' + col[j-1] + '201)'
+                sht.range((l, k+1)).value = sht.range((203,j)).value
                 j += 1
+                l += 1
             sht.range((203,k)).value = '最大值'
+            sht.range((1,k+1)).value = '最大值'
         wb.save(dir_xls)
         wb.close()
 

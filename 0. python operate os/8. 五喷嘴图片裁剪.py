@@ -28,7 +28,7 @@ for nozzles in nozzles_folder:
                 if quantity == 'velocity.tiff':
                     image_cut = image_cut[0:939, 65:1642]
                 else:
-                    image_cut = image_cut[0:939, 65:620]
+                    image_cut = image_cut[0:939, 65:930]
                 cv2.imwrite(dir_phs.replace(".tiff", "-cut.tiff"), image_cut)
                 cv2.destroyAllWindows()
 input("all done")

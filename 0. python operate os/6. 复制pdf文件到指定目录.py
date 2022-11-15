@@ -21,7 +21,7 @@ for nozzles in nozzles_folder:
             factors = scale_factor[num]
             str_factors = str(factors) 
             #  E:\\0-PhD\\5 nozzle\\5nozzle-DLN2.6SIZE\\5nozzle\\48\\48-1
-            file_copy = 'E:\\0-PhD\\5 nozzle\\5nozzle-DLN2.6SIZE\\5nozzle\\48\\0.5.pdf'
+            file_copy = 'E:\\0-PhD\\5 nozzle\\5nozzle-DLN2.6SIZE\\0.5.pdf'
             target_copy = dir_fluent_distance + '\\' + distance + '-' + str_factors + '\\0.5.pdf'
             shutil.copy(file_copy, target_copy)
             print("已复制完成任务   " + target_copy)

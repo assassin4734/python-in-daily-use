@@ -20,7 +20,7 @@ distance_folder = ['48', '60', '72']
 nozzles_folder = ['5nozzle', '3nozzle', '1nozzle']
 scale_factor = [1, 0.9, 0.8, 0.7, 0.6, 0.45, 0.4, 0.35, 0.3, 0.25]
 d = 0.096
-quantities = ['velocity.txt', 'ch+.txt', 'flame.txt']
+quantities = ['velocity.lay', 'ch+.lay', 'flame.lay']
 for nozzles in nozzles_folder:
     # E:\\0-PhD\\5 nozzle\\5nozzle-DLN2.6SIZE\\5nozzle
     dir_nozzles = 'E:\\0-PhD\\5 nozzle\\5nozzle-DLN2.6SIZE\\postprocessing\\' + nozzles
