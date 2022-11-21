@@ -5,11 +5,11 @@ import re
 import os
 
 
-eq_folder = ["28.5", "35.5", "40.5", "45.5", "52.5"]
+swirl_folder = ["28.5", "35.5", "40.5", "45.5", "52.5"]
 scale_factor = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
 photos = ['velocity.tiff', 'flame.tiff', 'ch+.tiff']
 # 定义统计物理量的目录
-for folders in eq_folder:
+for folders in swirl_folder:
     # 地址格式举例：F:\\PhD\\1 nozzle\\eq\\postprocessing\\eq=0.55
     dir_colletion = 'E:\\0-PhD\\1 nozzle\\different swirl number\\postprocessing\\z-' + folders
     print(dir_colletion + ' is on processing')
