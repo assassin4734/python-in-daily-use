@@ -1,3 +1,6 @@
-import string
-col = string.ascii_uppercase[0:21]
-print(col)
+import re
+ 
+s = "POSITION1"
+ret = re.search("POSITION-F", s)
+ 
+print(ret)

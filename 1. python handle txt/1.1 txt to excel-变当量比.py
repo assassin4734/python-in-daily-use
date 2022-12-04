@@ -41,7 +41,7 @@ def change(current_file):
     for elements in range(len(line_head)):
         head = line_head[elements]
         sheet.write(0, elements, head)
-    xls.save(dir_position + '/' + "数值模拟结果整理.xls")    # 将对应的xls文件存储
+    xls.save(dir_position + '/' + "数值模拟结果整理-火焰.xls")    # 将对应的xls文件存储
 
 
 def find_txt(current_file):
@@ -53,13 +53,13 @@ def find_txt(current_file):
     txt_list = []    # 用列表储存txt文件的路径
     xls_list= []
     for names in current_file:    # 用变量存放文件地址，即文件夹名字加文件名称
-        if re.search("数值模拟结果整理.xls", names, re.I):
+        if re.search("数值模拟结果整理-火焰.xls", names, re.I):
             xls_list.append(names)
             break
     if xls_list == []:
         for names in current_file:    
             if re.search(".txt", names, re.I):
-                if re.search("POSITION", names, re.I):
+                if re.search("POSITION-F", names, re.I):
                     txt_list.append(names)
                 else:
                     pass
@@ -74,7 +74,7 @@ scale_factor = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
 # 建立工作目录
 for folders in eq_folder:
     # 地址格式举例：F:\\PhD\\1 nozzle\\eq\\postprocessing\\eq=0.55
-    dir_colletion = 'F:\\PhD\\1 nozzle\\eq\\postprocessing\\' + folders
+    dir_colletion = 'E:\\0-PhD\\1 nozzle\\eq\\postprocessing\\' + folders
     print(dir_colletion + ' is on processing')
     for factors in scale_factor:
         str_factors = str(factors)
