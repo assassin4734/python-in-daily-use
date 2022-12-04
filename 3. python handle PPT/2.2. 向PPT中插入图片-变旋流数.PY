@@ -50,9 +50,9 @@ ph_col = float(input('输入纵向间距:'))
 i = int(input("请输入PPT的起始页码（0为首张）"))
 # 定义换行图片数
 j = int(input("请输入换行图片数（整数）"))
-for eq in swirl_folder:
-    # E:\\0-PhD\\1 nozzle\\eq\\postprocessing\\eq=0.55
-    dir_eq = 'E:\\0-PhD\\1 nozzle\\eq\\postprocessing\\' + eq
+for swirl in swirl_folder:
+    # E:\\0-PhD\\1 nozzle\\different swirl number\\postprocessing
+    dir_eq = 'E:\\0-PhD\\1 nozzle\\different swirl number\\postprocessing\\z-' + str(swirl)
     # 横向的起始位置
     x_position = 0
     # 纵向的起始位置
@@ -60,10 +60,10 @@ for eq in swirl_folder:
     print(dir_eq + ' is on processing')
     for num in range(len(scale_factor)):
         str_factors = str(scale_factor[num]) 
-        #  E:\\0-PhD\1 nozzle\\eq\\postprocessing\\eq=0.55\\40.5-0.1
-        dir_scale = dir_eq + '\\40.5-' + str_factors
+        #  E:\\0-PhD\\1 nozzle\\different swirl number\\postprocessing\\z-28.5\\28.5-0.1
+        dir_scale = dir_eq + '\\' + str(swirl) + '-' + str_factors
         print(dir_scale + ' is on going')
-        #  E:\\0-PhD\1 nozzle\\eq\\postprocessing\\eq=0.55\\40.5-0.1\\velocity-cut.tiff
+        #  E:\\0-PhD\\1 nozzle\\different swirl number\\postprocessing\\z-28.5\\28.5-0.1\\velocity-cut.tiff
         photo_position = dir_scale + '\\' + photos
         print(photo_position)
         # 插入图片

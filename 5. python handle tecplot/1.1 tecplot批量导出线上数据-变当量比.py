@@ -11,7 +11,7 @@ scale_factor = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
 line_position = ['0.333333', '0.666667', '1.33333', '2']
 for folders in eq_folder:
     # 地址格式举例：F:\\PhD\\1 nozzle\\eq\\postprocessing\\eq=0.55
-    dir_colletion = 'F:\\PhD\\1 nozzle\\eq\\postprocessing\\' + folders
+    dir_colletion = 'E:\\0-PhD\\1 nozzle\\eq\\postprocessing\\' + folders
     print(dir_colletion + ' is on processing')
     for factors in scale_factor:
         str_factors = str(factors)
@@ -23,9 +23,9 @@ for folders in eq_folder:
         while pos < 4:
             x_start = line_position[pos]
             pos += 1
-            locals()['position' + str(pos) + '_com'] = "'XSTART = " + x_start + " YSTART = -1.5 ZSTART = 0 XEND = " + x_start + " YEND = 1.5 ZEND = 0 NUMPTS = 200 EXTRACTTHROUGHVOLUME = F EXTRACTTOFILE = T EXTRACTFILENAME = " + "\\'" + dir_position  + "\\POSITION" + str(pos) + ".txt\\' '"
+            locals()['position' + str(pos) + '_com'] = "'XSTART = " + x_start + " YSTART = -1.5 ZSTART = 0 XEND = " + x_start + " YEND = 1.5 ZEND = 0 NUMPTS = 200 EXTRACTTHROUGHVOLUME = F EXTRACTTOFILE = T EXTRACTFILENAME = " + "\\'" + dir_position  + "\\POSITION-F" + str(pos) + ".txt\\' '"
             name_list.append(locals()['position' + str(pos) + '_com'])
-        file_dir = dir_position + "\\export.txt"
+        file_dir = dir_position + "\\export-f.txt"
         file_com = open(file_dir,'w')
         # file_com.write("")
         file_com.write("#!MC 1410\n$!RedrawAll\n$!ExtendedCommand\n  CommandProcessorID = 'Extract Precise Line'\n  Command = " + name_list[0] + "\n$!ExtendedCommand\n  CommandProcessorID = 'Extract Precise Line'\n  Command = " + name_list[1] + "\n$!ExtendedCommand\n  CommandProcessorID = 'Extract Precise Line'\n  Command = "  + name_list[2] + "\n$!ExtendedCommand\n  CommandProcessorID = 'Extract Precise Line'\n  Command = " + name_list[3])
@@ -33,8 +33,8 @@ for folders in eq_folder:
         portion = os.path.splitext(file_dir)
         newname = portion[0] + ".mcr"
         os.rename(file_dir, newname)
-        file_dir2 = dir_position + "\\export.mcr"
-        dir_layout = dir_position + "\\z-28.5-1-velocity.lay"
+        file_dir2 = dir_position + "\\export-f.mcr"
+        dir_layout = dir_position + "\\z-28.5-1-flame.lay"
         tp.load_layout(dir_layout)
         tp.macro.execute_file(file_dir2)
         print(dir_position + ' has done')
