@@ -1,8 +1,6 @@
 import originpro as op
 
 
-
-
 # 定义文件目录
 file_folder = [28.5, 35.5, 40.5, 45.5, 52.5]
 positions = [10, 20, 40, 60]
@@ -10,7 +8,7 @@ data_val = input('请输入想要导出的变量名称')
 # 定义统计物理量的目录以及建立统计表
 for folders in file_folder:
     str_folders = str(folders)
-    dir_colletion = 'F:\\PhD\\1 nozzle\\different swirl number\\postprocessing\\z-' + str_folders
+    dir_colletion = 'E:\\0-PhD\\1 nozzle\\different swirl number\\postprocessing\\z-' + str_folders
     print(dir_colletion + ' is on processing')
     src_opju = dir_colletion + '\\' + data_val + '.opju'
     print(src_opju)

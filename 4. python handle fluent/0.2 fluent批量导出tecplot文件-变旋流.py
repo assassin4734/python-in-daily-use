@@ -68,7 +68,7 @@ log = log_open()
 # 定义未成功输出后处理文件的目录集合
 failed_case = []
 # 定义目录变量
-file_folder = [45.5]
+file_folder = [28.5, 35.5, 40.5, 45.5, 52.5]
 scale_factor = [1, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1]
 # 定义一级目录
 for files in file_folder:
@@ -76,8 +76,8 @@ for files in file_folder:
     变量中间是fluent，就是说明这个变量是fluent的地址
     变量中间是post，就是说明这个变量是后处理的地址
     '''
-    dir_fluent = 'G:\\Assassin\\1nozzle\\different\\z-' + str(files)
-    dir_post = 'G:\\Assassin\\1nozzle\\different\\postprocessing\\z-' + str(files)
+    dir_fluent = 'E:\\0-PhD\\1 nozzle\\different\\z-' + str(files)
+    dir_post = 'E:\\Assassin\\1nozzle\\different\\postprocessing\\z-' + str(files)
     print(dir_fluent + ' is on processing')
     for num in range(len(scale_factor)):
         factors = scale_factor[num]

@@ -43,7 +43,7 @@ scale_factor = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
 # 定义统计物理量的目录以及建立统计表
 for folders in eq_folder:
     # 地址格式举例：F:\\PhD\\1 nozzle\\eq\\postprocessing\\eq=0.55
-    dir_colletion = 'F:\\PhD\\1 nozzle\\eq\\postprocessing\\' + folders
+    dir_colletion = 'E:\\0-PhD\\1 nozzle\\eq\\postprocessing\\' + folders
     print(dir_colletion + ' is on processing')
     app_col = xw.App(visible=True, add_book=False)
     wb_collection = app_col.books.add()
@@ -57,7 +57,7 @@ for folders in eq_folder:
         dir_position = dir_colletion + '\\' + '40.5-' + str_factors
         print(dir_position + ' is on going')
         app_ori = xw.App(visible=False, add_book=False)
-        wb_ori = app_ori.books.open(dir_position+ '/' + "数值模拟结果整理.xls")
+        wb_ori = app_ori.books.open(dir_position+ '/' + "数值模拟结果整理-火焰.xls")
         num_inverse = 9-num
 # 循环把四个特征位置的物理量都复制过去
         for i in range(0,4):

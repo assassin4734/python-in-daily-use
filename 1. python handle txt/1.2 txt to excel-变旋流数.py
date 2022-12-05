@@ -53,7 +53,7 @@ def find_txt(current_file):
     txt_list = []    # 用列表储存txt文件的路径
     xls_list= []
     for names in current_file:    # 用变量存放文件地址，即文件夹名字加文件名称
-        if re.search("数值模拟结果整理-火焰.xls", names, re.I):
+        if re.search("数值模拟结果整理-火焰2.xls", names, re.I):
             xls_list.append(names)
             break
     if xls_list == []:
