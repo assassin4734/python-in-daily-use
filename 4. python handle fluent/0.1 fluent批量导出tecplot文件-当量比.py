@@ -93,7 +93,7 @@ for eq in eq_folder:
             # 修改日志中的目标路径
         log_replace_root(tecplot_place, journal_place, log)
         # 定义fluent进程
-        session = pyFluent.launch_fluent(meshing_mode = False,version='3d',precision='double', show_gui=False, processor_count=1)
+        session = pyFluent.launch_fluent(version='3d',precision='double', show_gui=False, processor_count=1)
         try:
             # 读取结果文件
             session.solver.tui.file.read_case_data(file_name = dir_fluent_scale + '.cas.h5')
