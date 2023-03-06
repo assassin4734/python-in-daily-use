@@ -36,14 +36,14 @@ for nozzles in nozzles_folder:
                 pos += 1
                 locals()['position' + str(pos) + '_com'] = "'XSTART = " + x_start + " YSTART = 0 ZSTART = 0 XEND = " + x_start + " YEND = 4 ZEND = 0 NUMPTS = 200 EXTRACTTHROUGHVOLUME = F EXTRACTTOFILE = T EXTRACTFILENAME = " + "\\'" + dir_position  + "\\POSITION-F" + str(pos) + ".txt\\' '"
                 name_list.append(locals()['position' + str(pos) + '_com'])
-            file_dir = dir_position + "\\export20230303.txt"
+            file_dir = dir_position + "\\export20230306.txt"
             file_com = open(file_dir,'w')
             file_com.write("#!MC 1410\n$!RedrawAll\n$!ExtendedCommand\n  CommandProcessorID = 'Extract Precise Line'\n  Command = " + name_list[0] + "\n$!ExtendedCommand\n  CommandProcessorID = 'Extract Precise Line'\n  Command = " + name_list[1] + "\n$!ExtendedCommand\n  CommandProcessorID = 'Extract Precise Line'\n  Command = "  + name_list[2] + "\n$!ExtendedCommand\n  CommandProcessorID = 'Extract Precise Line'\n  Command = " + name_list[3])
             file_com.close()
             portion = os.path.splitext(file_dir)
             newname = portion[0] + ".mcr"
             os.rename(file_dir, newname)
-            file_dir2 = dir_position + "\\export20230303.mcr"
+            file_dir2 = dir_position + "\\export20230306.mcr"
             dir_layout = dir_position + "\\velocity.lay"
             try:
                 tp.load_layout(dir_layout)

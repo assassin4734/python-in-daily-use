@@ -1,0 +1,13 @@
+import pyautogui
+import pyscreenshot as ImageGrab
+import time # Sleep for 5 seconds to allow me to open book
+time.sleep(5)# Range can be changed depending on the number of pages
+for i in range(10): # Turn page
+    pyautogui.keyDown('right')
+    pyautogui.keyUp('right') # Take and save a screenshot
+    # part of the screen
+    im = ImageGrab.grab()
+    # save image file
+    im.save("box %d.png" % i)
+    # pyautogui.screenshot('images/page %d.pdf' % i)
+    time.sleep(0.05)
