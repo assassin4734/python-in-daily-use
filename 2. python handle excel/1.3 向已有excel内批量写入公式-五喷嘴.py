@@ -22,7 +22,7 @@ for nozzles in nozzles_folder:
         app = xw.App(visible=True, add_book=False)
         wb = app.books.open(dir_post_distance + '\\turbulent-flame-speed.xlsx')
         factor_sht = wb.sheets['Sheet1']
-        factor_sht['A1'].value = [54.63770214,49.17393192,43.71016171,38.2463915,32.78262128,24.58696596,21.85508085,19.12319575,16.39131064,13.65942553]
+        factor_sht['A1'].value = [40.17478098,36.15730288,32.13982479,28.12234669,24.10486859,18.07865144,16.06991239,14.06117334,12.05243429,10.04369525]
         col = string.ascii_uppercase[0:10]
         print(col)
         for k in range(4):

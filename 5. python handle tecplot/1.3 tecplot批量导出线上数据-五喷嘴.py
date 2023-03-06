@@ -11,6 +11,7 @@ distance_folder = ['48', '60', '72']
 nozzles_folder = ['5nozzle', '3nozzle', '1nozzle']
 scale_factor = [1, 0.9, 0.8, 0.7, 0.6, 0.45, 0.4, 0.35, 0.3, 0.25]
 line_position = ['0.5', '1.5', '2.5', '3.5']
+fail = []
 # 定义一级目录
 for nozzles in nozzles_folder:
     '''
@@ -35,16 +36,23 @@ for nozzles in nozzles_folder:
                 pos += 1
                 locals()['position' + str(pos) + '_com'] = "'XSTART = " + x_start + " YSTART = 0 ZSTART = 0 XEND = " + x_start + " YEND = 4 ZEND = 0 NUMPTS = 200 EXTRACTTHROUGHVOLUME = F EXTRACTTOFILE = T EXTRACTFILENAME = " + "\\'" + dir_position  + "\\POSITION-F" + str(pos) + ".txt\\' '"
                 name_list.append(locals()['position' + str(pos) + '_com'])
-            file_dir = dir_position + "\\export.txt"
+            file_dir = dir_position + "\\export20230303.txt"
             file_com = open(file_dir,'w')
             file_com.write("#!MC 1410\n$!RedrawAll\n$!ExtendedCommand\n  CommandProcessorID = 'Extract Precise Line'\n  Command = " + name_list[0] + "\n$!ExtendedCommand\n  CommandProcessorID = 'Extract Precise Line'\n  Command = " + name_list[1] + "\n$!ExtendedCommand\n  CommandProcessorID = 'Extract Precise Line'\n  Command = "  + name_list[2] + "\n$!ExtendedCommand\n  CommandProcessorID = 'Extract Precise Line'\n  Command = " + name_list[3])
             file_com.close()
             portion = os.path.splitext(file_dir)
             newname = portion[0] + ".mcr"
             os.rename(file_dir, newname)
-            file_dir2 = dir_position + "\\export.mcr"
+            file_dir2 = dir_position + "\\export20230303.mcr"
             dir_layout = dir_position + "\\velocity.lay"
-            tp.load_layout(dir_layout)
-            tp.macro.execute_file(file_dir2)
-            print(dir_position + ' has done')
+            try:
+                tp.load_layout(dir_layout)
+                tp.macro.execute_file(file_dir2)
+                print(dir_position + ' has done')
+            except:
+                fail.append(dir_layout)
+                continue
+print('\n')
+for ele in fail:
+    print(ele)
 input("all done, press enter to exit")
