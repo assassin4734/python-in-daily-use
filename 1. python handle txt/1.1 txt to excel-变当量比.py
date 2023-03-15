@@ -14,7 +14,8 @@ def change(current_file):
     """
     file_path = dir_position + '/' + current_file  # 用变量存放文件地址，即文件夹名字加文件名称
     txt0_file = open(file_path, 'r', encoding='gbk')    # 打开文件
-    sheet = xls.add_sheet(current_file.strip('.Ttxt'), cell_overwrite_ok=True)  # 增加工作表的表单
+    sheet = xls.add_sheet(current_file.strip('.Ttxt'),
+                          cell_overwrite_ok=True)  # 增加工作表的表单
     row = 0  # 行数的计数器归零
     while True:
         line = txt0_file.readline()     # 逐行读取文件
@@ -34,10 +35,11 @@ def change(current_file):
             item = text_line_convert[rank]
             sheet.write(row, rank, item)            # 将元素写入表单
         row += 1        # 循环内计数器加一，转到下一行
-    
+
     txt0_file.close()    # 关闭当前的txt文件
     # 添加表头
-    line_head = ("CoordinateX", "CoordinateY", "CoordinateZ", "ch2o", "Turbulent Energy Dissipation", "turbulent-flame-speed", "X Component Vorticity", "Temperature", "Y Component Vorticity", "stretch-fac", "helicity", "Z Component Vorticity", "oh", "X Component Velocity", "Pressure", "Y Component Velocity", "Turbulent Kinetic Energy", "fmean", "Z Component Velocity", "premixc", "damkohler-number", "Magnitude Vorticity", "turb-intensity", "heat-release-rate", "Magnitude Velocity", "q-criterion", "raw-q-criterion", "无量纲Z", "无量纲Y", "轴向速度", "径向速度")
+    line_head = ("CoordinateX", "CoordinateY", "CoordinateZ", "ch2o", "Turbulent Energy Dissipation", "turbulent-flame-speed", "X Component Vorticity", "Temperature", "Y Component Vorticity", "stretch-fac", "helicity", "Z Component Vorticity", "oh", "X Component Velocity", "Pressure",
+                 "Y Component Velocity", "Turbulent Kinetic Energy", "fmean", "Z Component Velocity", "premixc", "damkohler-number", "Magnitude Vorticity", "turb-intensity", "heat-release-rate", "Magnitude Velocity", "q-criterion", "raw-q-criterion", "无量纲Z", "无量纲Y", "轴向速度", "径向速度")
     for elements in range(len(line_head)):
         head = line_head[elements]
         sheet.write(0, elements, head)
@@ -51,13 +53,13 @@ def find_txt(current_file):
     :return:包含txt文件的列表
     """
     txt_list = []    # 用列表储存txt文件的路径
-    xls_list= []
+    xls_list = []
     for names in current_file:    # 用变量存放文件地址，即文件夹名字加文件名称
         if re.search("数值模拟结果整理-火焰.xls", names, re.I):
             xls_list.append(names)
             break
     if xls_list == []:
-        for names in current_file:    
+        for names in current_file:
             if re.search(".txt", names, re.I):
                 if re.search("POSITION-F", names, re.I):
                     txt_list.append(names)
@@ -81,7 +83,7 @@ for folders in eq_folder:
         global dir_position
         # 地址格式举例：F:\\PhD\\1 nozzle\\eq\\postprocessing\\eq=0.55\\40.5-1
         dir_position = dir_colletion + '\\' + '40.5-' + str_factors
-        print(dir_position + ' is on going')        
+        print(dir_position + ' is on going')
         file_names = os.listdir(dir_position)   # 列举目录下文件
         txt_file_and_numbers = find_txt(file_names)
         txt_file = txt_file_and_numbers[0]
