@@ -29,9 +29,9 @@ def choosing(display_str):
 print('定位后处理的目录')
 onenozzlefolder = {'变当量比':'eq\\postprocessing\\', '变旋流数':'different swirl number\\postprocessing\\'}
 folder = {'sw_folder': ["z-28.5", "z-35.5", "z-40.5", "z-45.5", "z-52.5"], 'eq_folder':["eq=0.55", "eq=0.65", "eq=0.75", "eq=0.85", "eq=0.95"]}
-scale_factor = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
+scale_factor = [1, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1]
 dir = 'E:\\0-PhD\\1 nozzle\\'
-step_num = int(input("输入想要拟合的缩放因子数量："))
+num_of_scale = int(input("输入想要拟合的缩放因子数量："))
 start = choosing("输入数据的起始行：")
 end = choosing("输入数据的结束行：")
 
@@ -135,7 +135,7 @@ for para in onenozzlefolder:
         scale_coe_new = pd.DataFrame()
         print('# 按样本数来插值')
         scale_ori = np.linspace(start=0.1, stop=1, num=len(dat_file))
-        scale_new = np.linspace(start=0.1, stop=1, num=step_num)
+        scale_new = np.linspace(start=0.1, stop=1, num=num_of_scale)
         for num in range(0, len(dat_file)):
             y = scale_coe.iloc[:, num].values
             func = interp1d(scale_ori, y, kind='cubic')
@@ -153,19 +153,10 @@ for para in onenozzlefolder:
             dir_re_matrix = dir_pod + 'pod_reconstructs\\'
         except:
             dir_re_matrix = dir_pod + 'pod_reconstructs\\'
-        # g = open(dir_re_matrix + 'singular_value.txt', 'w', encoding='utf-8')
-        # g.writelines(svm)
-        # total_singular_value = 0
-        # for i in svm:
-        #     total_singular_value += i
-        # g.write("总能量为：" + total_singular_value)
-        # for i in svm:
-        #     g.write(str(i) + "阶能量占比为：" + i/total_singular_value*100)
-        # g.close()
         print('# 用新的缩放因子组，求出新的特征速度矩阵')
         uv_matrix_new = phi_velocity.dot(scale_coe_new)
         print(uv_matrix_new)
-        for mark in range(0, step_num):
+        for mark in range(0, num_of_scale):
             re_name = dir_re_matrix + str(mark) + "-velocity.dat"
             # 求归一化后的u速度特征向量
             u_vector = (uv_matrix_new.head(end-start)[mark])
