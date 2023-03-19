@@ -1,4 +1,16 @@
 import originpro as op
+import sys
+
+
+def origin_shutdown_exception_hook(exctype, value, traceback):
+    '''Ensures Origin gets shut down if an uncaught exception'''
+    op.exit()
+    sys.__excepthook__(exctype, value, traceback)
+
+if op and op.oext:
+    sys.excepthook = origin_shutdown_exception_hook
+if op.oext:
+    op.set_show(True)
 
 
 # 定义目录
