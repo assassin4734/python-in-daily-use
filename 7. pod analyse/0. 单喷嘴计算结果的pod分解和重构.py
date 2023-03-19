@@ -89,6 +89,7 @@ for para in onenozzlefolder:
         except:
             dir_pod_matrix = dir_pod + 'pod_results\\'
         k = open(dir_pod_matrix + 'singular_value.txt', 'w', encoding='utf-8')
+        # 把svm中的值转化为字符串
         svm_str = list(map(str,svm))
         k.writelines(svm_str)
         k.write('\n')
