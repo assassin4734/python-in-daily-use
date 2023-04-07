@@ -1,7 +1,8 @@
-import os, re
+import os
+import re
 import numpy as np
 import pandas as pd
-from scipy.interpolate import interp1d
+from scipy.interpolate import lagrange
 
 
 pd.set_option("mode.chained_assignment", None)
@@ -27,8 +28,10 @@ def choosing(display_str):
 
 
 print('定位后处理的目录')
-onenozzlefolder = {'变当量比':'eq\\postprocessing\\', '变旋流数':'different swirl number\\postprocessing\\'}
-folder = {'sw_folder': ["z-28.5", "z-35.5", "z-40.5", "z-45.5", "z-52.5"], 'eq_folder':["eq=0.55", "eq=0.65", "eq=0.75", "eq=0.85", "eq=0.95"]}
+onenozzlefolder = {'变当量比': 'eq\\postprocessing-transport\\',
+                   '变旋流数': 'different swirl number\\postprocessing\\'}
+folder = {'sw_folder': ["z-28.5", "z-35.5", "z-40.5", "z-45.5", "z-52.5"],
+          'eq_folder': ["eq=0.55", "eq=0.65", "eq=0.75", "eq=0.85", "eq=0.95"]}
 scale_factor = [1, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1]
 dir = 'E:\\0-PhD\\1 nozzle\\'
 num_of_scale = int(input("输入想要拟合的缩放因子数量："))
@@ -66,13 +69,14 @@ for para in onenozzlefolder:
             # E:\\0-PhD\\1 nozzle\\eq\\postprocessing\\28.5\\pod_analyse\\
             dir_data = dir_pod + dat
             row = pd.read_csv(dir_data, sep=' ', dtype=np.float64, skiprows=start, names=[
-                            "y coordinate", "z coordinate", "z velocity", "y velocity"])
+                "y coordinate", "z coordinate", "z velocity", "y velocity"])
             # 这里保证列标签一致才能相加，记住v是被加到u的下面的
             print(row)
             u_velocity["data-"+str(num+1)] = row["z velocity"]
             v_velocity["data-"+str(num+1)] = row["y velocity"]
         print('# 定义一个坐标矩阵')
-        coordinate = pd.concat([row["y coordinate"], row["z coordinate"]], axis=1)
+        coordinate = pd.concat(
+            [row["y coordinate"], row["z coordinate"]], axis=1)
         print(coordinate)
         print("# 合并矩阵，合并之后的矩阵是纵向的")
         uv_matrix = pd.concat([u_velocity, v_velocity], axis=0)
@@ -90,7 +94,7 @@ for para in onenozzlefolder:
             dir_pod_matrix = dir_pod + 'pod_results\\'
         k = open(dir_pod_matrix + 'singular_value.txt', 'w', encoding='utf-8')
         # 把svm中的值转化为字符串
-        svm_str = list(map(str,svm))
+        svm_str = list(map(str, svm))
         k.writelines(svm_str)
         k.write('\n')
         total_singular_value = 0
@@ -99,8 +103,9 @@ for para in onenozzlefolder:
             total_singular_value += i
         k.write("总能量为：" + str(total_singular_value) + '\n')
         for i in svm:
-            k.write(str(i) + "  " + str(n) + "阶能量占比为：" + str(i/total_singular_value*100) + '\n')
-            n+=1
+            k.write(str(i) + "  " + str(n) + "阶能量占比为：" +
+                    str(i/total_singular_value*100) + '\n')
+            n += 1
         k.close()
         phi_velocity = uv_matrix.dot(lsm)
         print('# 保存pod分解的特征速度结果')
@@ -133,20 +138,27 @@ for para in onenozzlefolder:
         print("缩放因子特征矩阵")
         print(scale_coe)
         print('# 定义出缩放因子拟合矩阵')
+        # 样本的特征向量是按行排列的
         scale_coe_new = pd.DataFrame()
         print('# 按样本数来插值')
         scale_ori = np.linspace(start=0.1, stop=1, num=len(dat_file))
-        scale_new = np.linspace(start=0.1, stop=1, num=num_of_scale)
+        new_scale_list = np.linspace(start=0.1, stop=1, num=num_of_scale)
+        print('# 新的缩放因子组')
+        print(new_scale_list)
+        scale_new = new_scale_list
         for num in range(0, len(dat_file)):
+            # 行索引，按行去拟合
             y = scale_coe.iloc[:, num].values
-            func = interp1d(scale_ori, y, kind='cubic')
+            func = lagrange(scale_ori, y)
             scale_coe_newvector = pd.DataFrame(func(scale_new))
-            scale_coe_new = pd.concat([scale_coe_new, scale_coe_newvector], axis=1)
+            scale_coe_new = pd.concat(
+                [scale_coe_new, scale_coe_newvector], axis=1)
         print("旧的特征速度矩阵")
         print(phi_velocity)
         scale_coe_new = scale_coe_new.T
         scale_coe_new.index = list(phi_velocity)
         print("拟合后的缩放因子特征矩阵")
+        # 拟合之后按列排布了
         print(scale_coe_new)
         # 定义保存位置
         try:
@@ -154,6 +166,9 @@ for para in onenozzlefolder:
             dir_re_matrix = dir_pod + 'pod_reconstructs\\'
         except:
             dir_re_matrix = dir_pod + 'pod_reconstructs\\'
+        scale_coe_new.to_excel(dir_re_matrix + 'scale_coe_new.xlsx')
+        scale_coe_trans = scale_coe.T
+        scale_coe_trans.to_excel(dir_re_matrix + 'scale_coe_ori.xlsx')
         print('# 用新的缩放因子组，求出新的特征速度矩阵')
         uv_matrix_new = phi_velocity.dot(scale_coe_new)
         print(uv_matrix_new)

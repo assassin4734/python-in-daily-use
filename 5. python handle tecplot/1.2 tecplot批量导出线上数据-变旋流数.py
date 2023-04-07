@@ -23,9 +23,9 @@ for swirl in swirl_folder:
         while pos < 4:
             x_start = line_position[pos]
             pos += 1
-            locals()['position' + str(pos) + '_com'] = "'XSTART = " + x_start + " YSTART = -1.5 ZSTART = 0 XEND = " + x_start + " YEND = 1.5 ZEND = 0 NUMPTS = 200 EXTRACTTHROUGHVOLUME = F EXTRACTTOFILE = T EXTRACTFILENAME = " + "\\'" + dir_position  + "\\POSITION-F" + str(pos) + ".txt\\' '"
+            locals()['position' + str(pos) + '_com'] = "'XSTART = " + x_start + " YSTART = -1.5 ZSTART = 0 XEND = " + x_start + " YEND = 1.5 ZEND = 0 NUMPTS = 200 EXTRACTTHROUGHVOLUME = F EXTRACTTOFILE = T EXTRACTFILENAME = " + "\\'" + dir_position  + "\\POSITION-new" + str(pos) + ".txt\\' '"
             name_list.append(locals()['position' + str(pos) + '_com'])
-        file_dir = dir_position + "\\export-f.txt"
+        file_dir = dir_position + "\\export-new.txt"
         file_com = open(file_dir,'w')
         # file_com.write("")
         file_com.write("#!MC 1410\n$!RedrawAll\n$!ExtendedCommand\n  CommandProcessorID = 'Extract Precise Line'\n  Command = " + name_list[0] + "\n$!ExtendedCommand\n  CommandProcessorID = 'Extract Precise Line'\n  Command = " + name_list[1] + "\n$!ExtendedCommand\n  CommandProcessorID = 'Extract Precise Line'\n  Command = "  + name_list[2] + "\n$!ExtendedCommand\n  CommandProcessorID = 'Extract Precise Line'\n  Command = " + name_list[3])
@@ -33,7 +33,7 @@ for swirl in swirl_folder:
         portion = os.path.splitext(file_dir)
         newname = portion[0] + ".mcr"
         os.rename(file_dir, newname)
-        file_dir2 = dir_position + "\\export-f.mcr"
+        file_dir2 = dir_position + "\\export-new.mcr"
         dir_layout = dir_position + "\\z-28.5-1-flame.lay"
         tp.load_layout(dir_layout)
         tp.macro.execute_file(file_dir2)

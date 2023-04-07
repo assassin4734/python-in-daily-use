@@ -9,12 +9,12 @@ eq_folder = ["eq=0.55", "eq=0.65", "eq=0.75", "eq=0.85", "eq=0.95"]
 scale_factor = [1, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1]
 for folders in eq_folder:
     # 地址格式举例：F:\\PhD\\1 nozzle\\eq\\postprocessing\\eq=0.55
-    dir_colletion = 'E:\\0-PhD\\1 nozzle\\eq\\postprocessing\\' + folders
+    dir_colletion = 'E:\\0-PhD\\1 nozzle\\eq\\postprocessing-transport\\' + folders
     print(dir_colletion + ' is on processing')
     for factors in scale_factor:
         str_factors = str(factors)
         # 地址格式举例：F:\\PhD\\1 nozzle\\eq\\postprocessing\\eq=0.55\\40.5-1
-        dir_position = dir_colletion + '\\' + '40.5-' + str_factors
+        dir_position = dir_colletion + '\\' + str_factors
         # 地址格式举例：F:\\PhD\\1 nozzle\\eq\\postprocessing\\eq=0.55\\40.5-1\\z-28.5-1-velocity.lay
         dir_final = dir_position + '\\z-28.5-1-velocity.lay'
         tp.macro.execute_command('$!RedrawAll')
@@ -40,7 +40,7 @@ for folders in eq_folder:
                                            destination_zone=1,
                                            variables=[29, 30])
         tp.macro.execute_command('$!RedrawAll')
-        tp.data.save_tecplot_ascii('E:\\0-PhD\\1 nozzle\\eq\\postprocessing\\'+ folders + 
+        tp.data.save_tecplot_ascii('E:\\0-PhD\\1 nozzle\\eq\\postprocessing-transport\\'+ folders + 
                                    '\\pod_analyse\\' + str_factors + '-velocity.dat',
                                    zones=[1],
                                    variables=[27, 28, 29, 30],

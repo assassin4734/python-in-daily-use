@@ -7,7 +7,7 @@ import os
 
 swirl_folder = ["28.5", "35.5", "40.5", "45.5", "52.5"]
 scale_factor = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
-photos = ['velocity.tiff', 'flame.tiff', 'ch+.tiff']
+photos = ['velocity.tiff', 'flame.tiff', 'dimensionless OH.tiff']
 # 定义统计物理量的目录
 for folders in swirl_folder:
     # 地址格式举例：F:\\PhD\\1 nozzle\\eq\\postprocessing\\eq=0.55
@@ -36,7 +36,7 @@ for folders in swirl_folder:
                 if phs == 0:
                     image_cut = image_cut[0:876, 55:1642]
                 else:
-                    image_cut = image_cut[0:876, 55:854]
+                    image_cut = image_cut[35:289, 183:597]
                 cv2.imwrite(photo_position.strip(".tiff") + "-cut.tiff", image_cut)
                 cv2.destroyAllWindows()
         else:

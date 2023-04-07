@@ -4,10 +4,12 @@ import re
 
 
 print('定位后处理的目录')
-onenozzlefolder = {'变当量比': 'eq\\postprocessing\\',
-                   '变旋流数': 'different swirl number\\postprocessing\\'}
-folder = {'sw_folder': ["z-28.5", "z-35.5", "z-40.5", "z-45.5", "z-52.5"],
-          'eq_folder': ["eq=0.55", "eq=0.65", "eq=0.75", "eq=0.85", "eq=0.95"]}
+# onenozzlefolder = {'变当量比': 'eq\\postprocessing-correction\\',
+#                    '变旋流数': 'different swirl number\\postprocessing-correction\\'}
+onenozzlefolder = {'变当量比': 'eq\\postprocessing-correction\\',}
+# folder = {'sw_folder': ["z-28.5", "z-35.5", "z-40.5", "z-45.5", "z-52.5"],
+#           'eq_folder': ["eq=0.55", "eq=0.65", "eq=0.75", "eq=0.85", "eq=0.95"]}
+folder = {'eq_folder': ["eq=0.55", "eq=0.65", "eq=0.75", "eq=0.85", "eq=0.95"]}
 scale_num = range(0, 31)
 dir = 'E:\\0-PhD\\1 nozzle\\'
 src_name = dir + 'POD速度分解结果的出图处理.lay'

@@ -11,14 +11,18 @@ import win32com.client as client
 
 
 def input_function():
-    act_str = input("请输入图片名称:\n0: velocity-cut.tiff\n1: ch+-cut.tiff\n2: flame-cut.tiff\n")
+    act_str = input(
+        "请输入图片名称:\n0: velocity-cut.tiff\n1: dimensionless ch+-cut.tiff\n2: dimensionless OH-cut.tiff\n3: flame-cut.tiff\n")
     if act_str == "0":
         photo_name = 'velocity-cut.tiff'
         return(photo_name)
     elif act_str == "1":
-        photo_name = 'ch+-cut.tiff'
+        photo_name = 'dimensionless ch+-cut.tiff'
         return(photo_name)
     elif act_str == "2":
+        photo_name = 'dimensionless OH-cut.tiff'
+        return(photo_name)
+    elif act_str == "3":
         photo_name = 'flame-cut.tiff'
         return(photo_name)
     else:
@@ -38,30 +42,30 @@ scale_factor = [1, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1]
 # 图片名称
 photos = input_function()
 # 定义图片大小（也通过它来定义位置）
-print('火焰结构和反应区的图片宽度是3.28厘米，速度分布的图片宽度是7厘米')
+print('火焰结构和反应区的图片宽度是1.79厘米，速度分布的图片宽度是7厘米')
 ph_width = float(input('输入图片宽度：'))
-print('火焰结构和反应区的图片高度是3.87厘米，速度分布的图片高度是3.87厘米')
+print('火焰结构和反应区的图片高度是1.1厘米，速度分布的图片高度是3.87厘米')
 ph_height = float(input('输入图片高度：'))
-print('火焰结构和反应区的横向间距是3.28厘米，速度分布的横向间距是7厘米')
+print('火焰结构和反应区的横向间距是1.79厘米，速度分布的横向间距是7厘米')
 ph_line = float(input('输入横向间距:'))
-print('火焰结构和反应区的纵向间距是4.17厘米，速度分布的横向间距是3.87厘米')
+print('火焰结构和反应区的纵向间距是1.15厘米，速度分布的横向间距是3.87厘米')
 ph_col = float(input('输入纵向间距:'))
-#定义PPT的页数
+# 定义PPT的页数
 i = int(input("请输入PPT的起始页码（0为首张）"))
 # 定义换行图片数
 j = int(input("请输入换行图片数（整数）"))
 for eq in eq_folder:
     # E:\\0-PhD\\1 nozzle\\eq\\postprocessing\\eq=0.55
-    dir_eq = 'E:\\0-PhD\\1 nozzle\\eq\\postprocessing\\' + eq
+    dir_eq = 'E:\\0-PhD\\1 nozzle\\eq\\postprocessing-transport\\' + eq
     # 横向的起始位置
     x_position = 0
     # 纵向的起始位置
     y_position = 0
     print(dir_eq + ' is on processing')
     for num in range(len(scale_factor)):
-        str_factors = str(scale_factor[num]) 
+        str_factors = str(scale_factor[num])
         #  E:\\0-PhD\1 nozzle\\eq\\postprocessing\\eq=0.55\\40.5-0.1
-        dir_scale = dir_eq + '\\40.5-' + str_factors
+        dir_scale = dir_eq + '\\' + str_factors
         print(dir_scale + ' is on going')
         #  E:\\0-PhD\1 nozzle\\eq\\postprocessing\\eq=0.55\\40.5-0.1\\velocity-cut.tiff
         photo_position = dir_scale + '\\' + photos

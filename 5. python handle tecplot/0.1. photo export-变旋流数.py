@@ -7,8 +7,7 @@ tp.session.connect(port=7600)
 # 定义目录
 eq_folder = ["28.5", "35.5", "40.5", "45.5", "52.5"]
 scale_factor = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
-# layouts = ['-velocity.lay', '-flame.lay', '-ch+.lay']
-layouts = ['-flame.lay', '-ch+.lay']
+layouts = ['dimensionless OH.lay']
 for folders in eq_folder:
     # 地址格式举例：F:\\PhD\\1 nozzle\\eq\\postprocessing\\eq=0.55
     dir_colletion = 'E:\\0-PhD\\1 nozzle\\different swirl number\\postprocessing\\z-' + folders
@@ -19,7 +18,7 @@ for folders in eq_folder:
         dir_position = dir_colletion + '\\' + folders + '-' + str_factors
         for lays in layouts:
             # 地址格式举例：F:\\PhD\\1 nozzle\\eq\\postprocessing\\eq=0.55\\40.5-1\\z-28.5-1-velocity.lay
-            dir_final = dir_position + '\\z-28.5-1' + lays
+            dir_final = dir_position + '\\' + lays
             print(dir_final + ' is on going')
             photo_name = lays.strip('z-28.5-1-').replace('.lay','')
             dir_save = dir_position + '\\' + photo_name + '.tiff'
