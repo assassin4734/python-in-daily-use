@@ -32,9 +32,11 @@ for swirl in swirl_folder:
         file_com.close()
         portion = os.path.splitext(file_dir)
         newname = portion[0] + ".mcr"
+        if os.path.exists(newname) == True:
+            os.remove(newname)
         os.rename(file_dir, newname)
         file_dir2 = dir_position + "\\export-new.mcr"
-        dir_layout = dir_position + "\\z-28.5-1-flame.lay"
+        dir_layout = dir_position + "\\z-28.5-1-velocity.lay"
         tp.load_layout(dir_layout)
         tp.macro.execute_file(file_dir2)
         print(dir_position + ' has done')

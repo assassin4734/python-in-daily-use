@@ -41,7 +41,7 @@ def change(current_file):
     for elements in range(len(line_head)):
         head = line_head[elements]
         sheet.write(0, elements, head)
-    xls.save(dir_position + '/' + "数值模拟结果整理-火焰.xls")    # 将对应的xls文件存储
+    xls.save(dir_position + '/' + "数值模拟结果整理-new.xls")    # 将对应的xls文件存储
 
 
 def find_txt(current_file):
@@ -52,14 +52,14 @@ def find_txt(current_file):
     """
     txt_list = []    # 用列表储存txt文件的路径
     xls_list= []
-    for names in current_file:    # 用变量存放文件地址，即文件夹名字加文件名称
-        if re.search("数值模拟结果整理-火焰2.xls", names, re.I):
-            xls_list.append(names)
-            break
+    # for names in current_file:    # 用变量存放文件地址，即文件夹名字加文件名称
+    #     if re.search("数值模拟结果整理-new.xls", names, re.I):
+    #         xls_list.append(names)
+    #         break
     if xls_list == []:
         for names in current_file:    
             if re.search(".txt", names, re.I):
-                if re.search("POSITION-F", names, re.I):
+                if re.search("POSITION-new", names, re.I):
                     txt_list.append(names)
                 else:
                     pass

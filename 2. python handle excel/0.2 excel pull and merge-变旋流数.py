@@ -57,7 +57,7 @@ for swirl in swirl_folder:
         dir_position = dir_colletion + '\\' + swirl + '-' + str_factors
         print(dir_position + ' is on going')
         app_ori = xw.App(visible=False, add_book=False)
-        wb_ori = app_ori.books.open(dir_position+ '/' + "数值模拟结果整理-火焰.xls")
+        wb_ori = app_ori.books.open(dir_position+ '/' + "数值模拟结果整理-new.xls")
         num_inverse = 9-num
 # 循环把四个特征位置的物理量都复制过去
         for i in range(0,4):
