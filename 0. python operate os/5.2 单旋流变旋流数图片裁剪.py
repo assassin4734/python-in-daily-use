@@ -36,7 +36,7 @@ for folders in swirl_folder:
                 if phs == 0:
                     image_cut = image_cut[0:876, 55:1642]
                 else:
-                    image_cut = image_cut[35:289, 183:597]
+                    image_cut = image_cut[35:289, 183:771]
                 cv2.imwrite(photo_position.strip(".tiff") + "-cut.tiff", image_cut)
                 cv2.destroyAllWindows()
         else:

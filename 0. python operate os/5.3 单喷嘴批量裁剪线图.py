@@ -27,6 +27,6 @@ for para in onenozzlefolder:
                 dir_pos = dir_graph + '-' + str(pos) + '.png'
                 print(dir_pos)
                 image = Image.open(dir_pos)
-                image_cut = image.crop((0, 0, 1424, 1381))
+                image_cut = image.crop((0, 0, 1448, 1404))
                 image_cut.save(dir_pos.strip('.png') + '-cut.png')
 input('all done')

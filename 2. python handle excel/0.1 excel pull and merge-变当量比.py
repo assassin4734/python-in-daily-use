@@ -51,7 +51,7 @@ for folders in eq_folder:
     wb_collection = app_col.books.add()
     for i in range(1, 5):
         i = 5-i
-        wb_collection.sheets.add('POSITION' + str(i))
+        wb_collection.sheets.add('POSITION-new' + str(i))
 # 定义已有结果的目录
     for num in range(len(scale_factor)):
         factors = scale_factor[num]

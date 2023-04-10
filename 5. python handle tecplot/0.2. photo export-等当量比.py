@@ -7,7 +7,8 @@ tp.session.connect(port=7600)
 # 定义目录
 eq_folder = ["eq=0.55", "eq=0.65", "eq=0.75", "eq=0.85", "eq=0.95"]
 scale_factor = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
-layouts = ['dimensionless OH.lay']
+# layouts = ['dimensionless OH-cutregion.lay', 'dimensionless ch+.lay', 'z-28.5-1-flame.lay', 'z-28.5-1-velocity.lay']
+layouts = ['dimensionless OH-cutregion.lay']
 for folders in eq_folder:
     # 地址格式举例：F:\\PhD\\1 nozzle\\eq\\postprocessing\\eq=0.55
     dir_colletion = 'E:\\0-PhD\\1 nozzle\\eq\\postprocessing-transport\\' + folders

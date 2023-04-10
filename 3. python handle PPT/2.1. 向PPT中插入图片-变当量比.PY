@@ -20,7 +20,7 @@ def input_function():
         photo_name = 'dimensionless ch+-cut.tiff'
         return(photo_name)
     elif act_str == "2":
-        photo_name = 'dimensionless OH-cut.tiff'
+        photo_name = 'dimensionless OH-cutregion-cut.tiff'
         return(photo_name)
     elif act_str == "3":
         photo_name = 'flame-cut.tiff'
@@ -42,11 +42,11 @@ scale_factor = [1, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1]
 # 图片名称
 photos = input_function()
 # 定义图片大小（也通过它来定义位置）
-print('火焰结构和反应区的图片宽度是1.79厘米，速度分布的图片宽度是7厘米')
+print('火焰结构和反应区的图片宽度是2.55厘米，速度分布的图片宽度是7厘米')
 ph_width = float(input('输入图片宽度：'))
 print('火焰结构和反应区的图片高度是1.1厘米，速度分布的图片高度是3.87厘米')
 ph_height = float(input('输入图片高度：'))
-print('火焰结构和反应区的横向间距是1.79厘米，速度分布的横向间距是7厘米')
+print('火焰结构和反应区的横向间距是2.55厘米，速度分布的横向间距是7厘米')
 ph_line = float(input('输入横向间距:'))
 print('火焰结构和反应区的纵向间距是1.15厘米，速度分布的横向间距是3.87厘米')
 ph_col = float(input('输入纵向间距:'))
