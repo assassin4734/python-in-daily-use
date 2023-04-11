@@ -69,7 +69,7 @@ def find_txt(current_file):
     return txt_list, numbers_of_txt_in
 
 
-swirl_folder = ["28.5", "35.5", "40.5", "45.5", "52.5"]
+swirl_folder = ["28.5", "35.5", "45.5", "52.5"]
 scale_factor = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
 # 建立工作目录
 for swirl in swirl_folder:

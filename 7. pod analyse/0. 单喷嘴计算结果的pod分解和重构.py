@@ -2,7 +2,7 @@ import os
 import re
 import numpy as np
 import pandas as pd
-from scipy.interpolate import lagrange
+import scipy.interpolate
 
 
 pd.set_option("mode.chained_assignment", None)
@@ -149,7 +149,7 @@ for para in onenozzlefolder:
         for num in range(0, len(dat_file)):
             # 行索引，按行去拟合
             y = scale_coe.iloc[:, num].values
-            func = lagrange(scale_ori, y)
+            func = scipy.interpolate.interp1d(scale_ori, y, kind='cubic')
             scale_coe_newvector = pd.DataFrame(func(scale_new))
             scale_coe_new = pd.concat(
                 [scale_coe_new, scale_coe_newvector], axis=1)

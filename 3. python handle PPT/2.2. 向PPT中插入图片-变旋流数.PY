@@ -20,7 +20,7 @@ def input_function():
         photo_name = 'dimensionless ch+-cut.tiff'
         return(photo_name)
     elif act_str == "2":
-        photo_name = 'dimensionless OH-cut.tiff'
+        photo_name = 'dimensionless OH-cutregion-cut.tiff'
         return(photo_name)
     elif act_str == "3":
         photo_name = 'flame-cut.tiff'
@@ -37,7 +37,7 @@ print("共有" + str(len(PPTPres.Slides)) + "张slide")
 # 定义磅值与厘米的换算基准
 unit_point = 0.03527
 # 定义目录
-swirl_folder = ["28.5", "35.5", "40.5", "45.5", "52.5"]
+swirl_folder = ["28.5", "35.5", "45.5", "52.5"]
 scale_factor = [1, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1]
 # 图片名称
 photos = input_function()

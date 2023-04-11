@@ -10,11 +10,11 @@ tp.session.connect(port=7600)
 print('定位后处理的目录')
 onenozzlefolder = {'变当量比': 'eq\\postprocessing-transport\\',
                    '变旋流数': 'different swirl number\\postprocessing\\'}
-folder = {'sw_folder': ["z-28.5", "z-35.5", "z-40.5", "z-45.5", "z-52.5"],
+folder = {'sw_folder': ["z-28.5", "z-35.5", "z-45.5", "z-52.5"],
           'eq_folder': ["eq=0.55", "eq=0.65", "eq=0.75", "eq=0.85", "eq=0.95"]}
 scale_factor = [1, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1]
 ohbase_eq = ['0.000374318', '0.00143009', '0.00246363', '0.00313996', '0.00338699']
-ohbase_sw = ['0.00089801', '0.00103219', '0.00140672', '0.0012862', '0.00114995']
+ohbase_sw = ['0.00113446', '0.0013674', '0.00122263', '0.00155205']
 dir = 'E:\\0-PhD\\1 nozzle\\'
 for para in onenozzlefolder:
     # E:\\0-PhD\\1 nozzle\\eq\\postprocessing\\

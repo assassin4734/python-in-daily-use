@@ -45,6 +45,18 @@ for folders in eq_folder:
                                     Z2 = 0
                                     XVar = 29
                                     YVar = 28''')
+        # tp.macro.execute_command('''$!CreateRectangularZone 
+        #                             IMax = 200
+        #                             JMax = 200
+        #                             KMax = 1
+        #                             X1 = 0
+        #                             Y1 = -1.6
+        #                             Z1 = 0
+        #                             X2 = 5
+        #                             Y2 = 1.6
+        #                             Z2 = 0
+        #                             XVar = 29
+        #                             YVar = 28''')
         tp.macro.execute_command('''$!Pick SetMouseMode
                                     MouseMode = Select''')
         tp.active_frame().plot().show_mesh = True

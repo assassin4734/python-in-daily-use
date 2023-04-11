@@ -6,7 +6,7 @@ from tecplot.constant import *
 
 tp.session.connect(port=7600)
 
-swirl_folder = ["28.5", "35.5", "40.5", "45.5", "52.5"]
+swirl_folder = ["28.5", "35.5", "45.5", "52.5"]
 scale_factor = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
 line_position = ['0.333333', '0.666667', '1.33333', '2']
 for swirl in swirl_folder:

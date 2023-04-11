@@ -38,7 +38,7 @@ sht_dic = dict(zip(head_list, sht_head))
 # 输入物理量，容错
 action_str_int = choosing()
 # 定义文件目录
-swirl_folder = ["28.5", "35.5", "40.5", "45.5", "52.5"]
+swirl_folder = ["28.5", "35.5", "45.5", "52.5"]
 scale_factor = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
 # 定义统计物理量的目录以及建立统计表
 for swirl in swirl_folder:
@@ -49,7 +49,7 @@ for swirl in swirl_folder:
     wb_collection = app_col.books.add()
     for i in range(1,5):
         i = 5-i
-        wb_collection.sheets.add('POSITION' + str(i))
+        wb_collection.sheets.add('POSITION-new-' + str(i))
 # 定义已有结果的目录
     for num in range(len(scale_factor)):
         factors = scale_factor[num]
