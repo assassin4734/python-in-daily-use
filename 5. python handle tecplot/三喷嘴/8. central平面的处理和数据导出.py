@@ -15,7 +15,8 @@ def func_central(dir_post_sw_f, yd_f):
             str_factors + '\\central-streamline.lay'
         dir_line = dir_post_sw_f + '\\' + \
             str_factors + '\\interline.dat'
-        command_t = "XSTART = 0 YSTART = " + yd_f + " ZSTART = 0 XEND = 2.4 YEND = " + yd_f + " ZEND = 0 NUMPTS = 200 EXTRACTTHROUGHVOLUME = F EXTRACTTOFILE = T EXTRACTFILENAME = '" + dir_line + "' "
+        command_t = "XSTART = 0 YSTART = " + yd_f + " ZSTART = 0 XEND = 2.4 YEND = " + \
+            yd_f + " ZEND = 0 NUMPTS = 200 EXTRACTTHROUGHVOLUME = F EXTRACTTOFILE = F "
         dir_save = dir_post_working.replace('.lay', '.png')
         # tecplot修改和导出
         tp.load_layout(dir_post_working)
@@ -23,66 +24,72 @@ def func_central(dir_post_sw_f, yd_f):
         tp.active_frame().plot().contour(0).colormap_filter.continuous_min = -0.7
         tp.active_frame().plot().contour(0).colormap_filter.continuous_max = 2
         tp.macro.execute_command('$!RedrawAll')
-        tp.macro.execute_command('$!RedrawAll')
         tp.active_frame().plot().show_shade = True
         tp.macro.execute_command('$!RedrawAll')
-        tp.active_frame().plot().streamtraces.add(seed_point=[2.45828, 2.70363],
-                                                  stream_type=Streamtrace.TwoDLine)
-        tp.active_frame().plot().streamtraces.add(seed_point=[2.45781, 2.40794],
-                                                  stream_type=Streamtrace.TwoDLine)
-        tp.active_frame().plot().streamtraces.add(seed_point=[2.45734, 2.11225],
-                                                  stream_type=Streamtrace.TwoDLine)
-        tp.active_frame().plot().streamtraces.add(seed_point=[2.45686, 1.81656],
-                                                  stream_type=Streamtrace.TwoDLine)
-        tp.active_frame().plot().streamtraces.add(seed_point=[2.45639, 1.52087],
-                                                  stream_type=Streamtrace.TwoDLine)
-        tp.active_frame().plot().streamtraces.add(seed_point=[2.45592, 1.22518],
-                                                  stream_type=Streamtrace.TwoDLine)
-        tp.active_frame().plot().streamtraces.add(seed_point=[2.45545, 0.929487],
-                                                  stream_type=Streamtrace.TwoDLine)
-        tp.active_frame().plot().streamtraces.add(seed_point=[2.45497, 0.633796],
-                                                  stream_type=Streamtrace.TwoDLine)
-        tp.active_frame().plot().streamtraces.add(seed_point=[2.4545, 0.338105],
-                                                  stream_type=Streamtrace.TwoDLine)
-        tp.active_frame().plot().streamtraces.add(seed_point=[2.45403, 0.0424138],
-                                                  stream_type=Streamtrace.TwoDLine)
-        tp.active_frame().plot().streamtraces.add(seed_point=[0.175415, 1.25399],
-                                                  stream_type=Streamtrace.TwoDLine)
-        tp.active_frame().plot().streamtraces.add(seed_point=[0.175415, 1.1855],
-                                                  stream_type=Streamtrace.TwoDLine)
-        tp.active_frame().plot().streamtraces.add(seed_point=[0.175415, 1.11701],
-                                                  stream_type=Streamtrace.TwoDLine)
-        tp.active_frame().plot().streamtraces.add(seed_point=[0.175415, 1.04852],
-                                                  stream_type=Streamtrace.TwoDLine)
-        tp.active_frame().plot().streamtraces.add(seed_point=[0.175415, 0.980028],
-                                                  stream_type=Streamtrace.TwoDLine)
-        tp.active_frame().plot().streamtraces.add(seed_point=[0.175415, 0.911537],
-                                                  stream_type=Streamtrace.TwoDLine)
-        tp.active_frame().plot().streamtraces.add(seed_point=[0.175415, 0.843047],
-                                                  stream_type=Streamtrace.TwoDLine)
-        tp.active_frame().plot().streamtraces.add(seed_point=[0.175415, 0.774556],
-                                                  stream_type=Streamtrace.TwoDLine)
-        tp.active_frame().plot().streamtraces.add(seed_point=[0.175415, 0.706065],
-                                                  stream_type=Streamtrace.TwoDLine)
-        tp.active_frame().plot().streamtraces.add(seed_point=[0.175415, 0.637574],
-                                                  stream_type=Streamtrace.TwoDLine)
+        # tp.active_frame().plot().streamtraces.add(seed_point=[2.45828, 2.70363],
+        #                                           stream_type=Streamtrace.TwoDLine)
+        # tp.active_frame().plot().streamtraces.add(seed_point=[2.45781, 2.40794],
+        #                                           stream_type=Streamtrace.TwoDLine)
+        # tp.active_frame().plot().streamtraces.add(seed_point=[2.45734, 2.11225],
+        #                                           stream_type=Streamtrace.TwoDLine)
+        # tp.active_frame().plot().streamtraces.add(seed_point=[2.45686, 1.81656],
+        #                                           stream_type=Streamtrace.TwoDLine)
+        # tp.active_frame().plot().streamtraces.add(seed_point=[2.45639, 1.52087],
+        #                                           stream_type=Streamtrace.TwoDLine)
+        # tp.active_frame().plot().streamtraces.add(seed_point=[2.45592, 1.22518],
+        #                                           stream_type=Streamtrace.TwoDLine)
+        # tp.active_frame().plot().streamtraces.add(seed_point=[2.45545, 0.929487],
+        #                                           stream_type=Streamtrace.TwoDLine)
+        # tp.active_frame().plot().streamtraces.add(seed_point=[2.45497, 0.633796],
+        #                                           stream_type=Streamtrace.TwoDLine)
+        # tp.active_frame().plot().streamtraces.add(seed_point=[2.4545, 0.338105],
+        #                                           stream_type=Streamtrace.TwoDLine)
+        # tp.active_frame().plot().streamtraces.add(seed_point=[2.45403, 0.0424138],
+        #                                           stream_type=Streamtrace.TwoDLine)
+        # tp.active_frame().plot().streamtraces.add(seed_point=[0.175415, 1.25399],
+        #                                           stream_type=Streamtrace.TwoDLine)
+        # tp.active_frame().plot().streamtraces.add(seed_point=[0.175415, 1.1855],
+        #                                           stream_type=Streamtrace.TwoDLine)
+        # tp.active_frame().plot().streamtraces.add(seed_point=[0.175415, 1.11701],
+        #                                           stream_type=Streamtrace.TwoDLine)
+        # tp.active_frame().plot().streamtraces.add(seed_point=[0.175415, 1.04852],
+        #                                           stream_type=Streamtrace.TwoDLine)
+        # tp.active_frame().plot().streamtraces.add(seed_point=[0.175415, 0.980028],
+        #                                           stream_type=Streamtrace.TwoDLine)
+        # tp.active_frame().plot().streamtraces.add(seed_point=[0.175415, 0.911537],
+        #                                           stream_type=Streamtrace.TwoDLine)
+        # tp.active_frame().plot().streamtraces.add(seed_point=[0.175415, 0.843047],
+        #                                           stream_type=Streamtrace.TwoDLine)
+        # tp.active_frame().plot().streamtraces.add(seed_point=[0.175415, 0.774556],
+        #                                           stream_type=Streamtrace.TwoDLine)
+        # tp.active_frame().plot().streamtraces.add(seed_point=[0.175415, 0.706065],
+        #                                           stream_type=Streamtrace.TwoDLine)
+        # tp.active_frame().plot().streamtraces.add(seed_point=[0.175415, 0.637574],
+        #                                           stream_type=Streamtrace.TwoDLine)
         tp.macro.execute_extended_command(command_processor_id='Extract Precise Line',
                                           command=command_t)
+        tp.data.save_tecplot_ascii(dir_line,
+                                   zones=[1],
+                                   include_text=False,
+                                   precision=9,
+                                   include_geom=False,
+                                   include_data_share_linkage=True,
+                                   use_point_format=True)
         tp.active_frame().plot().show_shade = False
         tp.macro.execute_command('$!RedrawAll')
-        frame = tp.active_frame()
-        plot = frame.plot(PlotType.Cartesian2D)
-        plot.axes.x_axis.ticks.auto_spacing = False
-        plot.axes.x_axis.ticks.spacing = 1
-        tp.export.save_tiff(dir_save,
-                           width=7680,
-                           region=ExportRegion.AllFrames,
-                           supersample=1,
-                           convert_to_256_colors=False,
-                           gray_scale_depth=None,
-                           byte_order=TIFFByteOrder.Intel)
-        print(dir_post_working + ' photo exported')
-        tp.save_layout(dir_post_working, use_relative_paths=True)
+        # frame = tp.active_frame()
+        # plot = frame.plot(PlotType.Cartesian2D)
+        # plot.axes.x_axis.ticks.auto_spacing = False
+        # plot.axes.x_axis.ticks.spacing = 1
+        # tp.export.save_tiff(dir_save,
+        #                     width=7680,
+        #                     region=ExportRegion.AllFrames,
+        #                     supersample=1,
+        #                     convert_to_256_colors=False,
+        #                     gray_scale_depth=None,
+        #                     byte_order=TIFFByteOrder.Intel)
+        # # print(dir_post_working + ' photo exported')
+        # tp.save_layout(dir_post_working, use_relative_paths=True)
 
 
 if __name__ == "__main__":
