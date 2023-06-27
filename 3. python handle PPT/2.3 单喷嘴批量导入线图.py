@@ -36,13 +36,13 @@ unit_point = 0.03527
 print('# 定义图片类型')
 data = input_function()
 print('# 定义图片大小（也通过它来定义位置）')
-print('图片宽度是3厘米')
+print('图片宽度是15厘米')
 ph_width = float(input('输入图片宽度：'))
-print('图片高度是2.91厘米')
+print('图片高度是14.55厘米')
 ph_height = float(input('输入图片高度：'))
-print('横向间距是3厘米')
+print('横向间距是15厘米')
 ph_line = float(input('输入横向间距:'))
-print('纵向间距是2.91厘米')
+print('纵向间距是14.55厘米')
 ph_col = float(input('输入纵向间距:'))
 print('# 定义PPT的页数')
 i0 = int(input("请输入PPT的起始页码（0为首张）"))
@@ -57,7 +57,7 @@ onenozzlefolder = {'变当量比': 'eq\\postprocessing-transport\\',
                    '变旋流数': 'different swirl number\\postprocessing\\'}
 folder = {'sw_folder': ["z-28.5", "z-35.5", "z-40.5", "z-45.5", "z-52.5"],
           'eq_folder': ["eq=0.55", "eq=0.65", "eq=0.75", "eq=0.85", "eq=0.95"]}
-positions = [1, 2, 3, 4]
+positions = [4, 3, 2, 1]
 dir = 'E:\\0-PhD\\1 nozzle\\'
 if variable == '变当量比':
     fol = 'eq_folder'
@@ -72,7 +72,7 @@ for var in folder[fol]:
     dir_graph = dir_origin + var + '-' + data
     for pos in positions:
         i1 = i0
-        dir_pos = dir_graph + '-' + str(pos) + '-cut.png'
+        dir_pos = dir_graph + '-' + str(pos) + '.png'
         print(dir_pos)
         image = PPTPres.Slides[i1].Shapes.AddPicture(FileName=dir_pos, LinkToFile=False,
                                             SaveWithDocument=True, Left=x_position, Top=y_position,

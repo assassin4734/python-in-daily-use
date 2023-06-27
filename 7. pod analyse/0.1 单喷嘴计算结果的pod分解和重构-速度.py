@@ -30,9 +30,9 @@ def choosing(display_str):
 print('定位后处理的目录')
 onenozzlefolder = {'变当量比': 'eq\\postprocessing-transport\\',
                    '变旋流数': 'different swirl number\\postprocessing\\'}
-folder = {'sw_folder': ["z-28.5", "z-35.5", "z-40.5", "z-45.5", "z-52.5"],
+folder = {'sw_folder': ["z-28.5", "z-35.5", "z-45.5", "z-52.5"],
           'eq_folder': ["eq=0.55", "eq=0.65", "eq=0.75", "eq=0.85", "eq=0.95"]}
-scale_factor = [1, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1]
+scale_factor = [1, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3]
 dir = 'E:\\0-PhD\\1 nozzle\\'
 num_of_scale = int(input("输入想要拟合的缩放因子数量："))
 start = choosing("输入数据的起始行：")
@@ -46,6 +46,8 @@ for para in onenozzlefolder:
         fol = 'eq_folder'
     elif para == '变旋流数':
         fol = 'sw_folder'
+    elif para == '拟合公式':
+        fol = 'add-formula'
     else:
         pass
     for var in folder[fol]:
@@ -69,7 +71,7 @@ for para in onenozzlefolder:
             # E:\\0-PhD\\1 nozzle\\eq\\postprocessing\\28.5\\pod_analyse\\
             dir_data = dir_pod + dat
             row = pd.read_csv(dir_data, sep=' ', dtype=np.float64, skiprows=start, names=[
-                "y coordinate", "z coordinate", "z velocity", "y velocity"])
+                "premixc", "y coordinate", "z coordinate", "z velocity", "y velocity"])
             # 这里保证列标签一致才能相加，记住v是被加到u的下面的
             print(row)
             u_velocity["data-"+str(num+1)] = row["z velocity"]
@@ -131,7 +133,7 @@ for para in onenozzlefolder:
             with open(mode_name, 'r+', encoding='utf-8') as f:
                 content = f.read()
                 f.seek(0, 0)
-                f.write('VARIABLES = Z,Y,U,V\nZONE I=200,J=200,F=POINT \n' + content)
+                f.write('''TITLE     = "Tecplot Export"\nVARIABLES = "V28"\n"V29"\n"V30"\n"V31"\nZONE T="Rectangular zone"\n STRANDID=0, SOLUTIONTIME=0\n I=200, J=200, K=1, ZONETYPE=Ordered\n DATAPACKING=POINT\n DT=(SINGLE SINGLE SINGLE SINGLE )\n''' + content)
                 f.close()
         print('# 进行缩放因子的拟合,先求缩放因子特征矩阵')
         scale_coe = uv_matrix.T.dot(phi_velocity)
@@ -149,7 +151,7 @@ for para in onenozzlefolder:
         for num in range(0, len(dat_file)):
             # 行索引，按行去拟合
             y = scale_coe.iloc[:, num].values
-            func = scipy.interpolate.interp1d(scale_ori, y, kind='cubic')
+            func = scipy.interpolate.interp1d(scale_ori, y, kind='quadratic')
             scale_coe_newvector = pd.DataFrame(func(scale_new))
             scale_coe_new = pd.concat(
                 [scale_coe_new, scale_coe_newvector], axis=1)
@@ -174,9 +176,9 @@ for para in onenozzlefolder:
         print(uv_matrix_new)
         for mark in range(0, num_of_scale):
             re_name = dir_re_matrix + str(mark) + "-velocity.dat"
-            # 求归一化后的u速度特征向量
+            # 求u速度特征向量
             u_vector = (uv_matrix_new.head(end-start)[mark])
-            # 求归一化后的v速度特征向量
+            # 求v速度特征向量
             v_vector = (uv_matrix_new.tail(end-start)[mark])
             # 合并两个速度特征向量
             pod_uv_matrix = pd.concat([u_vector, v_vector], axis=1)
@@ -187,6 +189,6 @@ for para in onenozzlefolder:
             with open(re_name, 'r+', encoding='utf-8') as f:
                 content = f.read()
                 f.seek(0, 0)
-                f.write('VARIABLES = Z,Y,U,V\nZONE I=200,J=200,F=POINT \n' + content)
+                f.write('''TITLE     = "Tecplot Export"\nVARIABLES = "V28"\n"V29"\n"V30"\n"V31"\nZONE T="Rectangular zone"\n STRANDID=0, SOLUTIONTIME=0\n I=200, J=200, K=1, ZONETYPE=Ordered\n DATAPACKING=POINT\n DT=(SINGLE SINGLE SINGLE SINGLE )\n''' + content)
                 f.close()
 input("POD分解与重构已经完成")

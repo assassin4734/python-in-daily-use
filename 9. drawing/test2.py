@@ -1,26 +1,15 @@
-from sklearn.linear_model import LinearRegression
-from sklearn.preprocessing import PolynomialFeatures
 import numpy as np
+import statsmodels.api as sm
 
-# Generate some sample data
-X = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
-y = np.array([5, 12, 21])
+# generate some random data
+X = np.random.rand(100, 3)
+y = X[:, 0] + 2*X[:, 1] + 3*X[:, 2] + np.random.randn(100)
 
-# Create polynomial features of degree 4
-poly = PolynomialFeatures(degree=4)
-X_poly = poly.fit_transform(X)
+# add a constant column to X
+X = sm.add_constant(X)
 
-# Train a linear regression model on the polynomial features
-model = LinearRegression()
-model.fit(X_poly, y)
+# fit an OLS model
+model = sm.OLS(y, X).fit()
 
-# Print out the features and coefficients
-features = model.get_feature_names()
-for i in range(len(features)):
-    print(features[i], model.coef_[i])
-    print('\n')
-    # print(len(features))
-model.coef_[0] = 100
-for i in range(len(features)):
-    print(features[i], model.coef_[i])
-    # print(len(features))
+# print the summary of the model
+print(model.summary())

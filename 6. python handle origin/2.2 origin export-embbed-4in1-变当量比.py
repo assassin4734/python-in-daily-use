@@ -16,16 +16,16 @@ for folders in file_folder:
     while graphs < 5:
         position = str(positions[graphs - 1])
         gp = op.find_graph('Graph' + str(graphs))
-        if data_val == '无量纲轴向速度':
-            gp[0].yscale = 1   
-            gp[0].set_ylim(begin=-1.5, end=2, step=0.5)
-        elif data_val == '无量纲径向速度':
-            gp[0].yscale = 1   
-            gp[0].set_ylim(begin=-0.5, end=2, step=0.5)
-        else:
-            pass
-        gp[0].xscale = 1   
-        gp[0].set_xlim(begin=0, end=1.5, step=0.5)
+        # if data_val == '无量纲轴向速度':
+        #     gp[0].yscale = 1   
+        #     gp[0].set_ylim(begin=-1.5, end=2, step=0.5)
+        # elif data_val == '无量纲径向速度':
+        #     gp[0].yscale = 1   
+        #     gp[0].set_ylim(begin=-0.5, end=2, step=0.5)
+        # else:
+        #     pass
+        # gp[0].xscale = 1   
+        # gp[0].set_xlim(begin=0, end=1.5, step=0.5)
         exp_file = dir_colletion + '\\' + folders + '-' + data_val + '-' + position + '.png'
         gp.save_fig(path=exp_file, type='png', width=1500)
         print(f'Graph exported: {exp_file}')
