@@ -32,6 +32,12 @@ X_t = np.column_stack((q_t, sw_t, er_t))
 print('看看检验矩阵的坐标')
 print(X_t)
 # 把训练数据转化为array然后输出看看
+lr = np.array(characteristic['回流区长度'])
+print('回流区长度：\n')
+print(lr)
+dr = np.array(characteristic['回流区直径'])
+print('回流区直径：\n')
+print(dr)
 Eye_axial = np.array(characteristic['涡心轴向位置'])
 print('涡心轴向位置：\n')
 print(Eye_axial)
@@ -45,6 +51,12 @@ Flame_angle = np.array(characteristic['火焰张角'])
 print('火焰张角：\n')
 print(Flame_angle)
 # 把检验数据转化为array然后输出看看
+lr_t = np.array(test['回流区长度'])
+print('回流区长度：\n')
+print(lr_t)
+dr_t = np.array(test['回流区直径'])
+print('回流区直径：\n')
+print(dr_t)
 Eye_axial_t = np.array(test['涡心轴向位置'])
 print('涡心轴向位置：\n')
 print(Eye_axial_t)
@@ -58,10 +70,10 @@ Flame_angle_t = np.array(test['火焰张角'])
 print('火焰张角：\n')
 print(Flame_angle_t)
 # 定义特征数据集合
-list_var = [Eye_axial, Eye_radial, Flame_length, Flame_angle]
+list_var = [lr, dr, Eye_axial, Eye_radial, Flame_length, Flame_angle]
 # 定义检验数据集合
-list_var_t = [Eye_axial_t, Eye_radial_t, Flame_length_t, Flame_angle_t]
-name = ['涡心轴向位置预测', '涡心径向位置预测', '火焰长度预测', '火焰张角预测']
+list_var_t = [lr_t, dr_t, Eye_axial_t, Eye_radial_t, Flame_length_t, Flame_angle_t]
+name = ['回流区长度', '回流区直径', '涡心轴向位置预测', '涡心径向位置预测', '火焰长度预测', '火焰张角预测']
 # 定义预测值的集合
 list_pre = []
 # 定义检验预测值的集合

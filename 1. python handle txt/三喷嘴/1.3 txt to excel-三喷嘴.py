@@ -25,7 +25,7 @@ def change(dir_post_sw_f):
         line_head.columns = dat_to_excel.columns
         extran = pd.concat([line_head, dat_to_excel], axis=0 ,ignore_index=True)
         print(extran)
-        extran.to_excel(dir_post_working.replace('.dat', '.xlsx'))
+        extran.to_excel(dir_post_working.replace('.dat', '.xlsx'), header=False, index=False)
 
 
 if __name__ == "__main__":
