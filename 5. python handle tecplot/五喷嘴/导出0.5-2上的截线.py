@@ -1,6 +1,7 @@
 from tecplot.exception import *
 from tecplot.constant import *
 import tecplot as tp
+import os
 
 
 tp.session.connect()
@@ -17,28 +18,28 @@ def tecexport(dir_post_scale):
         tp.macro.execute_command('$!RedrawAll')
         if i != 2:
             tp.macro.execute_extended_command(command_processor_id='Extract Precise Line',
-                                              command='XSTART = -4 YSTART = 0.25 ZSTART = 0 XEND = 4 YEND = 0.25 ZEND = 0 NUMPTS = 600 EXTRACTTHROUGHVOLUME = F EXTRACTTOFILE = F ')
+                                              command='XSTART = -3.9 YSTART = 0.5 ZSTART = 0 XEND = 3.9 YEND = 0.5 ZEND = 0 NUMPTS = 600 EXTRACTTHROUGHVOLUME = F EXTRACTTOFILE = F ')
             tp.macro.execute_extended_command(command_processor_id='Extract Precise Line',
-                                              command='XSTART = -4 YSTART = 0.5 ZSTART = 0 XEND = 4 YEND = 0.5 ZEND = 0 NUMPTS = 600 EXTRACTTHROUGHVOLUME = F EXTRACTTOFILE = F ')
+                                              command='XSTART = -3.9 YSTART = 1 ZSTART = 0 XEND = 3.9 YEND = 1 ZEND = 0 NUMPTS = 600 EXTRACTTHROUGHVOLUME = F EXTRACTTOFILE = F ')
             tp.macro.execute_extended_command(command_processor_id='Extract Precise Line',
-                                              command='XSTART = -4 YSTART = 0.75 ZSTART = 0 XEND = 4 YEND = 0.75 ZEND = 0 NUMPTS = 600 EXTRACTTHROUGHVOLUME = F EXTRACTTOFILE = F ')
+                                              command='XSTART = -3.9 YSTART = 1.5 ZSTART = 0 XEND = 3.9 YEND = 1.5 ZEND = 0 NUMPTS = 600 EXTRACTTHROUGHVOLUME = F EXTRACTTOFILE = F ')
             tp.macro.execute_extended_command(command_processor_id='Extract Precise Line',
-                                              command='XSTART = -4 YSTART = 1 ZSTART = 0 XEND = 4 YEND = 1 ZEND = 0 NUMPTS = 600 EXTRACTTHROUGHVOLUME = F EXTRACTTOFILE = F ')
+                                              command='XSTART = -3.9 YSTART = 2 ZSTART = 0 XEND = 3.9 YEND = 2 ZEND = 0 NUMPTS = 600 EXTRACTTHROUGHVOLUME = F EXTRACTTOFILE = F ')
         else:
             tp.macro.execute_extended_command(command_processor_id='Extract Precise Line',
-                                              command='XSTART = -3.6 YSTART = 0.25 ZSTART = 0 XEND = 3.6 YEND = 0.25 ZEND = 0 NUMPTS = 600 EXTRACTTHROUGHVOLUME = F EXTRACTTOFILE = F ')
+                                              command='XSTART = -3 YSTART = 0.5 ZSTART = 0 XEND = 3 YEND = 0.5 ZEND = 0 NUMPTS = 400 EXTRACTTHROUGHVOLUME = F EXTRACTTOFILE = F ')
             tp.macro.execute_extended_command(command_processor_id='Extract Precise Line',
-                                              command='XSTART = -3.6 YSTART = 0.5 ZSTART = 0 XEND = 3.6 YEND = 0.5 ZEND = 0 NUMPTS = 600 EXTRACTTHROUGHVOLUME = F EXTRACTTOFILE = F ')
+                                              command='XSTART = -3 YSTART = 1 ZSTART = 0 XEND = 3 YEND = 1 ZEND = 0 NUMPTS = 400 EXTRACTTHROUGHVOLUME = F EXTRACTTOFILE = F ')
             tp.macro.execute_extended_command(command_processor_id='Extract Precise Line',
-                                              command='XSTART = -3.6 YSTART = 0.75 ZSTART = 0 XEND = 3.6 YEND = 0.75 ZEND = 0 NUMPTS = 600 EXTRACTTHROUGHVOLUME = F EXTRACTTOFILE = F ')
+                                              command='XSTART = -3 YSTART = 1.5 ZSTART = 0 XEND = 3 YEND = 1.5 ZEND = 0 NUMPTS = 400 EXTRACTTHROUGHVOLUME = F EXTRACTTOFILE = F ')
             tp.macro.execute_extended_command(command_processor_id='Extract Precise Line',
-                                              command='XSTART = -3.6 YSTART = 1 ZSTART = 0 XEND = 3.6 YEND = 1 ZEND = 0 NUMPTS = 600 EXTRACTTHROUGHVOLUME = F EXTRACTTOFILE = F ')
+                                              command='XSTART = -3 YSTART = 2 ZSTART = 0 XEND = 3 YEND = 2 ZEND = 0 NUMPTS = 400 EXTRACTTHROUGHVOLUME = F EXTRACTTOFILE = F ')
 
         tp.macro.execute_command('$!RedrawAll')
         for j in range(4):
             zone = "[" + str(j+2) + "]"
-            dir_zone = dir_post_scale + str((j+1)*0.25) + "-" + lay[-11:-4] + ".csv"
-            # os.remove(dir_post_scale + str((j+1)*0.25) + lay[-11:-4] + ".csv")
+            # os.remove(dir_post_scale + str((j+1)*0.25) + "-" + lay[-11:-4] + ".csv")
+            dir_zone = dir_post_scale + str((j+1)*0.5) + "-" + lay[-11:-4] + ".csv"
             command_e_as_f = 'VarNames:FrOp=1:ZnCount=1:ZnList='+zone+':AllVars:ValSep=",":FNAME="'+dir_zone+'"'
             tp.macro.execute_extended_command(command_processor_id='excsv',
                                             command=command_e_as_f)
