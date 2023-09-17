@@ -11,7 +11,7 @@ def cutph(dir_post_sw_f, cutleft, cutright):
         files = os.listdir(dir_post)
         ph_names = []
         for file in files:
-            if re.search('.png', file, re.I) and file!='central-streamline.png' and file!='central-streamline-cut.png':
+            if re.search('.png', file, re.I) and file!='central-streamline.png' and file!='central-streamline-cut.png' and 'cut' not in file:
                 ph_names.append(file)
         for ph_name in ph_names:
             dir_post_working = dir_post + ph_name

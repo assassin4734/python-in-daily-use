@@ -11,7 +11,7 @@ tp.session.connect()
 def find_lay(current_file):
     lay_list = []    # 用列表储存txt文件的路径
     for names in current_file:
-        if re.search(".lay", names, re.I) and (names != 'central-streamline.lay' and names != 'crosspoint.lay' and names != 'flame.lay' and names != 'regionexport.lay'):
+        if re.search(".lay", names, re.I) and (names == '0.75d-p.lay'):
             lay_list.append(names)
         else:
             pass

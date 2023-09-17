@@ -42,7 +42,7 @@ def var(tfs, mv, dirc):
     for lo in range(len(tfs)):
         cts.append(cts_value)
         # 计算湍流时间尺度
-        tts_value = ((tfs[lo]/0.52/(mv[lo]*ti))**4)*cts_value
+        tts_value = ((tfs[lo]/0.25/(mv[lo]*ti))**4)*cts_value
         tts.append(tts_value)
         # 计算湍流长度尺度
         tls_value = mv[lo]*ti*tts_value
