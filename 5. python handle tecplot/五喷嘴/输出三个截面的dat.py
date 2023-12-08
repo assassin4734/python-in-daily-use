@@ -11,9 +11,11 @@ def tecexport(dir_post_scale):
     dir_2 = dir_post_scale + 'q-2.lay'
     dir_45 = dir_post_scale + 'y-velocity-45.lay'
     dir_files = [dir_1, dir_2, dir_45]
+    # dir_files = [dir_2]
     for i in range(len(dir_files)):
         lay = dir_files[i]
         dir_dst = dir_post_scale + 'plane' + str(i+1) + '.dat'
+        print(lay)
         tp.load_layout(lay)
         tp.macro.execute_command('$!RedrawAll')
         if 'y-velocity' not in lay:

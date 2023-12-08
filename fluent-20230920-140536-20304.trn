@@ -1,0 +1,115 @@
+Auto-Transcript Start Time:  14:05:36, 20 Sep 2023 中国标准时间 
+Current Directory: "E:\1-python-in-daily-use"
+Information: The server has started and is running.
+
+              Welcome to ANSYS Fluent 2022 R2
+
+              Copyright 1987-2022 ANSYS, Inc. All Rights Reserved.
+              Unauthorized use, distribution or duplication is prohibited.
+              This product is subject to U.S. laws governing export and re-export.
+              For full Legal Notice, see documentation.
+
+Build Time: May 27 2022 08:52:58 EDT  Build Id: 10212  
+ 
+Connected License Server List:	1055@localhost
+Host spawning Node 0 on machine "WIN-I21RD2LCQ0C" (win64).
+
+-----------------------------------------------------------------------------------
+ID    Hostname         Core   O.S.         PID    Vendor                          
+-----------------------------------------------------------------------------------
+n10   WIN-I21RD2LCQ0C  11/12  Windows-x64  18388  Intel(R) Core(TM) i7-8750H      
+n9    WIN-I21RD2LCQ0C  10/12  Windows-x64  18840  Intel(R) Core(TM) i7-8750H      
+n8    WIN-I21RD2LCQ0C  9/12   Windows-x64  13260  Intel(R) Core(TM) i7-8750H      
+n7    WIN-I21RD2LCQ0C  8/12   Windows-x64  6992   Intel(R) Core(TM) i7-8750H      
+n6    WIN-I21RD2LCQ0C  7/12   Windows-x64  20320  Intel(R) Core(TM) i7-8750H      
+n5    WIN-I21RD2LCQ0C  6/12   Windows-x64  13524  Intel(R) Core(TM) i7-8750H      
+n4    WIN-I21RD2LCQ0C  5/12   Windows-x64  18180  Intel(R) Core(TM) i7-8750H      
+n3    WIN-I21RD2LCQ0C  4/12   Windows-x64  12892  Intel(R) Core(TM) i7-8750H      
+n2    WIN-I21RD2LCQ0C  3/12   Windows-x64  17396  Intel(R) Core(TM) i7-8750H      
+n1    WIN-I21RD2LCQ0C  2/12   Windows-x64  5676   Intel(R) Core(TM) i7-8750H      
+n0*   WIN-I21RD2LCQ0C  1/12   Windows-x64  14552  Intel(R) Core(TM) i7-8750H      
+host  WIN-I21RD2LCQ0C         Windows-x64  9312   Intel(R) Core(TM) i7-8750H      
+
+MPI Option Selected: intel
+Selected system interconnect: default
+-----------------------------------------------------------------------------------
+
+Cleanup script file is E:\\1-python-in-daily-use\\cleanup-fluent-WIN-I21RD2LCQ0C-9312.bat
+
+> Fast-loading "C:\PROGRA~1\ANSYS Inc\v222\fluent\fluent22.2.0\\addons\afd\lib\hdfio.bin"
+Done.
+Multicore SMT processors detected. Processor affinity set!
+
+Reading from WIN-I21RD2LCQ0C:"G:\calculations\1-5nozzle-fullgridandcorexperiment\1nozzle\48\48-1\48-1-0912.cas.h5" in NODE0 mode ...
+  Reading mesh ...
+     8736228 cells,     1 cell zone  ...
+        8736228 mixed cells,  zone id: 7368
+    31516610 faces,     8 face zones ...
+         380908 polygonal wall faces,  zone id: 7376
+          41176 polygonal pressure-outlet faces,  zone id: 7
+            665 polygonal mass-flow-inlet faces,  zone id: 6
+            670 polygonal mass-flow-inlet faces,  zone id: 5
+            679 polygonal mass-flow-inlet faces,  zone id: 4
+            674 polygonal mass-flow-inlet faces,  zone id: 3
+            673 polygonal mass-flow-inlet faces,  zone id: 227
+       31091165 mixed interior faces,  zone id: 7369
+    15185679 nodes,     1 node zone  ...
+  Done.
+
+
+Building...
+     mesh
+	distributing mesh
+		parts...........,
+		faces...........,
+		nodes...........,
+		cells...........,
+        bandwidth reduction using Reverse Cuthill-McKee: 805737/9530 = 84.5474
+     materials,
+     interface,
+     domains,
+	mixture
+     zones,
+	zone48-0.25:48-0.25---1
+	outlet
+	interior-62
+	inlet-middle
+	inlet-1
+	inlet-2
+	inlet-3
+	inlet-4
+	zone48-0.25:48-0.25---1:60
+     parallel,
+
+Reading "G:\calculations\1-5nozzle-fullgridandcorexperiment\1nozzle\48\48-1\48-1.pdf"...
+
+	Version of the file: "fluent2021r2" 
+  Read PDF case variables
+	Type of the PDF Table: Nonadiabatic Table with FGM Model (Two Streams) 
+  Read species data
+  Read stream inlets
+  Read PDF tables
+    - mixture fraction table
+    - temperature table
+    - density table
+    - specific heat table
+      reading species            1 of  20  2 of  20  3 of  20  4 of  20  5 of  20  6 of  20  7 of  20  8 of  20  9 of  20 10 of  20 11 of  20 12 of  20 13 of  20 14 of  20 15 of  20 16 of  20 17 of  20 18 of  20 19 of  20 20 of  20
+    - species mole fraction table
+
+  Read intermediate data
+Read 20 species (sectioned c, 3D prepdf)
+PDF file successfully read.
+
+Material no:
+  Changing method of "Viscosity" to "constant" -- data required.
+
+Done.
+
+Reading from WIN-I21RD2LCQ0C:"G:\calculations\1-5nozzle-fullgridandcorexperiment\1nozzle\48\48-1\48-1-0912.dat.h5" in NODE0 mode ...
+
+
+  Reading results.
+Parallel variables...
+
+ turbulent viscosity limited to viscosity ratio of 1.000000e+05 in 133049 cells 
+Done.

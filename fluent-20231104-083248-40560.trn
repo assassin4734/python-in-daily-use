@@ -1,0 +1,24 @@
+Auto-Transcript Start Time:  08:32:48, 04 Nov 2023 中国标准时间 
+Current Directory: "E:\1-python-in-daily-use"
+Information: The server has started and is running.
+
+              Welcome to ANSYS Fluent 2022 R2
+
+              Copyright 1987-2022 ANSYS, Inc. All Rights Reserved.
+              Unauthorized use, distribution or duplication is prohibited.
+              This product is subject to U.S. laws governing export and re-export.
+              For full Legal Notice, see documentation.
+
+Build Time: May 27 2022 08:52:58 EDT  Build Id: 10212  
+ 
+Connected License Server List:	
+
+ANSYS LICENSE MANAGER ERROR:Request name cfd_solve_level2 does not exist in the licensing pool.
+License file does not support this version.
+Feature:       cfd_solve_level2
+Application version > License version: 2022.0502 > 2021.1231
+License path:  D:\\software\\ANSYS Inc\\Shared Files\\licensing\\license_files\\ansyslmd.lic;
+FlexNet Licensing error:-21,126
+
+
+Unexpected license problem; exiting.

@@ -32,7 +32,7 @@ def log_replace_tec(save_place, journal, root_replace=''):
     root_place: tecplot文件的保存地址
     save_place: 修改后的journal文件的保存地址
     '''
-    text = root_replace + '45-0912.plt'
+    text = root_replace + '45-1101.plt'
     journal_modify = journal.replace("replacehere", text)
     journal = journal_modify
     new_log = open(save_place, "w", encoding="utf-8")
@@ -52,10 +52,10 @@ def copyFile(src, dest):
 
 
 if __name__ == "__main__":
-    journal_newp = 'F:\\calculations\\1-5nozzle-fullgridandcorexperiment\\createnewplane.txt'
-    journal_export = 'F:\\calculations\\1-5nozzle-fullgridandcorexperiment\\data export journal.txt'
+    journal_newp = 'G:\\calculations\\0-newadjustment\\createnewplane.txt'
+    journal_export = 'G:\\calculations\\0-newadjustment\\data export journal.txt'
     # 定义计算根目录
-    dir = 'F:\\calculations\\1-5nozzle-fullgridandcorexperiment\\'
+    dir = 'G:\\calculations\\5nozzle-20231024\\'
     dir_post = dir + 'postprocessing\\'
     # 定义目录变量
     distance_folder = ['48']
@@ -81,13 +81,13 @@ if __name__ == "__main__":
                 dir_working = dir_D + '\\' + distance + '-' + str_factors
                 # 后处理目录
                 dir_post_working = dir_post_D + '\\' + distance + '-' + str_factors
-                copyFile(dir+'0.5.pdf', dir_working+'\\0.5.pdf')
+                # copyFile(dir+'0.5.pdf', dir_working+'\\0.5.pdf')
                 journal_place = dir_post_working + '\\' + distance + '-' + str_factors + '45.txt'
                 journal_newplane = dir_post_working + '\\' + distance + '-' + str_factors + '45plane.txt'
                 tecplot_place = dir_post_working + '\\'
                 print(dir_working + ' is under calculatiing')
                 # 读取case文件
-                session.solver.tui.file.read_case_data(case_file_name = dir_working + '\\' + distance + '-' + str_factors + '-0912.cas.h5')
+                session.solver.tui.file.read_case_data(case_file_name = dir_working + '\\' + distance + '-' + str_factors + '-1101.cas.h5')
                 # 后处理
                 plane = log_open(journal_newp)
                 log_replace_plane(save_place=journal_newplane, scale=scale_factor[num], journal=plane)
@@ -96,7 +96,7 @@ if __name__ == "__main__":
                 log_replace_tec(root_replace=tecplot_place, save_place=journal_place, journal=tecex)
                 session.solver.tui.file.read_journal(file_name = journal_place)
                 # 保存
-                session.solver.tui.file.write_case_data(dir_working + '\\' + distance + '-' + str_factors + '-0912.cas.h5')
+                session.solver.tui.file.write_case_data(dir_working + '\\' + distance + '-' + str_factors + '-1101.cas.h5')
     # 结束fluent进程
     session.exit()
     # 结束

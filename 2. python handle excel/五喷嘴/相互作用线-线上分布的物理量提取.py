@@ -24,7 +24,7 @@ def pullandmerge(key):
 if __name__ == "__main__":
     # 定义想要的变量
     # key = input('输入想要的变量：')
-    key = 'oh'
+    key = 'ch2o'
     # 定义计算根目录
     dir = "E:\\0-PhD\\5 nozzle\\0-5NOZZLE-DLN2.6SIZE\\"
     dir_post = dir + "postprocessing\\"

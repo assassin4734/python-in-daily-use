@@ -1,0 +1,49 @@
+Auto-Transcript Start Time:  14:51:03, 27 Oct 2023 中国标准时间 
+Current Directory: "E:\1-python-in-daily-use"
+Information: The server has started and is running.
+
+              Welcome to ANSYS Fluent 2022 R2
+
+              Copyright 1987-2022 ANSYS, Inc. All Rights Reserved.
+              Unauthorized use, distribution or duplication is prohibited.
+              This product is subject to U.S. laws governing export and re-export.
+              For full Legal Notice, see documentation.
+
+Build Time: May 27 2022 08:52:58 EDT  Build Id: 10212  
+ 
+Connected License Server List:	1055@localhost
+Host spawning Node 0 on machine "WIN-I21RD2LCQ0C" (win64).
+
+-----------------------------------------------------------------------------------
+ID    Hostname         Core   O.S.         PID    Vendor                          
+-----------------------------------------------------------------------------------
+n10   WIN-I21RD2LCQ0C  11/12  Windows-x64  17252  Intel(R) Core(TM) i7-8750H      
+n9    WIN-I21RD2LCQ0C  10/12  Windows-x64  11832  Intel(R) Core(TM) i7-8750H      
+n8    WIN-I21RD2LCQ0C  9/12   Windows-x64  1864   Intel(R) Core(TM) i7-8750H      
+n7    WIN-I21RD2LCQ0C  8/12   Windows-x64  12712  Intel(R) Core(TM) i7-8750H      
+n6    WIN-I21RD2LCQ0C  7/12   Windows-x64  5484   Intel(R) Core(TM) i7-8750H      
+n5    WIN-I21RD2LCQ0C  6/12   Windows-x64  19264  Intel(R) Core(TM) i7-8750H      
+n4    WIN-I21RD2LCQ0C  5/12   Windows-x64  15024  Intel(R) Core(TM) i7-8750H      
+n3    WIN-I21RD2LCQ0C  4/12   Windows-x64  17496  Intel(R) Core(TM) i7-8750H      
+n2    WIN-I21RD2LCQ0C  3/12   Windows-x64  16328  Intel(R) Core(TM) i7-8750H      
+n1    WIN-I21RD2LCQ0C  2/12   Windows-x64  17304  Intel(R) Core(TM) i7-8750H      
+n0*   WIN-I21RD2LCQ0C  1/12   Windows-x64  5452   Intel(R) Core(TM) i7-8750H      
+host  WIN-I21RD2LCQ0C         Windows-x64  4212   Intel(R) Core(TM) i7-8750H      
+
+MPI Option Selected: intel
+Selected system interconnect: default
+-----------------------------------------------------------------------------------
+
+Cleanup script file is E:\\1-python-in-daily-use\\cleanup-fluent-WIN-I21RD2LCQ0C-4212.bat
+
+> 
+Error: File "F:\calculations\0-newadjustment\1nozzle\48\48-1\48-1-1024.cas.h5" not found!
+Error Object: #f
+/exit y
+Shutting down Server...
+Services Shutdown...Done.
+Server Shutdown...Done.
+Queue Cleared...Done.
+Shutdown Complete.
+Auto-Transcript Stop Time:  14:51:42, 27 Oct 2023 中国标准时间 
+Total Transcript Time: 0 Minute 39 Second.

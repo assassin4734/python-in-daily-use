@@ -18,5 +18,5 @@ def cutph(dir_post):
     return('all done')
 
 
-dir = 'E:\\0-PhD\\3 nozzle\\本章图片\\流动与火焰特征\\汇总\\'
+dir = 'E:\\0-PhD\\3 nozzle\\PICTURES_OF_CHAPTER5\\流动与火焰特征\\汇总\\'
 cutph(dir)

@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import scipy.interpolate
+import os
 
 
 pd.set_option("mode.chained_assignment", None)
@@ -12,9 +13,8 @@ def pod_decomposition_and_reconstruction():
     进行POD分解
     '''
     print('开始pod分解\n')
-    print("# 定义两个dataframe储存两个方向的速度")
-    u_velocity = pd.DataFrame()
-    v_velocity = pd.DataFrame()
+    print("# 定义一个dataframe储存ch2o")
+    ch2o = pd.DataFrame()
     print("# 读取不同截面的dat")
     # 按照plane分类，把不同缩放因子的dat都读出来
     for plane in planes:
@@ -38,38 +38,37 @@ def pod_decomposition_and_reconstruction():
             # 按缩放因子读对应的dat
             dir_data = dir_post_n + str_factors + '\\' + plane + '.dat'
             print(dir_data + '正被处理\n')
-            print("# 生成两个速度的矩阵")
+            print("# 生成ch2o矩阵")
             ori_data = pd.read_csv(dir_data, sep=' ', dtype=np.float64, skiprows=start, names=varname)
             # 这里保证列标签一致才能相加，记住v是被加到u的下面的
             print(ori_data)
             # V30是轴向速度 V31是径向速度
-            u_velocity["data-"+str(num+1)] = ori_data["V30"]
-            v_velocity["data-"+str(num+1)] = ori_data["V31"]
+            ch2o["data-"+str(num+1)] = ori_data["ch2o"]
             print('# 定义一个坐标矩阵')
             global coordinate
             coordinate = pd.concat([ori_data[x_cor], ori_data[y_cor]], axis=1)
             # print(coordinate)
             # 进行速度数据的POD分解处理
-        lsm, svm, rsm = pod_dealwith_velocitydat(u_velocity, v_velocity)
+        lsm, svm, rsm = pod_dealwith_velocitydat(ch2o)
         # 进行特征值的计算
         singular_value_save(plane, svm)
         # 进行模态的计算
-        mode_cal(start, end, plane, uv_matrix, lsm)
+        mode_cal(start, end, plane, ch2o_matrix, lsm)
         # 进行速度的重构
         pod_reconstruction(start, end, plane)
 
 
-def pod_dealwith_velocitydat(u_velocity, v_velocity):
+def pod_dealwith_velocitydat(ch2o):
     '''
     处理已经提取完成的速度矩阵
     '''    
     print("# 合并矩阵，合并之后的矩阵是纵向的")
-    global uv_matrix
-    uv_matrix = pd.concat([u_velocity, v_velocity], axis=0)
-    print(uv_matrix)
+    global ch2o_matrix
+    ch2o_matrix = ch2o
+    print(ch2o_matrix)
     print('# 求快照pod的特征方阵')
     # 暂时用10替代
-    C_snap_pod = (uv_matrix.T.dot(uv_matrix)).divide(10)
+    C_snap_pod = (ch2o_matrix.T.dot(ch2o_matrix)).divide(10)
     print('# 进行pod分解')
     lsm, svm, rsm = np.linalg.svd(C_snap_pod)
     print('# 把特征值储存，然后求特征能量占比，也同样储存')
@@ -95,34 +94,31 @@ def singular_value_save(plane, svm):
     singular_value.close()
 
 
-def mode_cal(start, end, plane, uv_matrix, lsm):
-    global phi_velocity
-    phi_velocity = uv_matrix.dot(lsm)
+def mode_cal(start, end, plane, ch2o_matrix, lsm):
+    global phi_ch2o
+    phi_ch2o = ch2o_matrix.dot(lsm)
     print('# 保存pod分解的特征速度结果')
     # 暂时用10替代
     for num in range(0, 9):
         mode_name = dir_pod_matrix + plane + '\\' + str(num) + "th_mode.dat"
         # 求归一化的基准以及归一化
         phi_nor = 0
-        nor_vector = phi_velocity.iloc[:, num]
+        nor_vector = phi_ch2o.iloc[:, num]
         for ele in nor_vector:
             phi_nor = phi_nor + ele ** 2
         phi_nor = phi_nor ** 0.5
-        phi_velocity.iloc[:, num] = nor_vector.divide(phi_nor)
-        # 求归一化后的u速度特征向量
-        u_vector = (phi_velocity.head(end-start)[num])
-        # 求归一化后的v速度特征向量
-        v_vector = (phi_velocity.tail(end-start)[num])
-        # 合并两个速度特征向量
-        pod_uv_matrix = pd.concat([u_vector, v_vector], axis=1)
+        phi_ch2o.iloc[:, num] = nor_vector.divide(phi_nor)
+        # 求归一化后的ch2o向量
+        ch2o_vector = (phi_ch2o.head(end-start)[num])
+        pod_ch2o_matrix = ch2o_vector
         # 与坐标一起合并
-        pod_matrix = pd.concat([coordinate, pod_uv_matrix], axis=1)
+        pod_matrix = pd.concat([coordinate, pod_ch2o_matrix], axis=1)
         # 保存结果
         pod_matrix.to_csv(mode_name, sep=' ', index=False, header=None)
         with open(mode_name, 'r+', encoding='utf-8') as f:
             content = f.read()
             f.seek(0, 0)
-            f.write('TITLE     = "Tecplot Export"\nVARIABLES = "'+x_cor+'"\n"'+y_cor+'"\n"V30"\n"V31"\nZONE T="Rectangular zone"\n STRANDID=0, SOLUTIONTIME=0\n I=200, J=200, K=1, ZONETYPE=Ordered\n DATAPACKING=POINT\n DT=(SINGLE SINGLE SINGLE SINGLE )\n' + content)
+            f.write('TITLE     = "Tecplot Export"\nVARIABLES = "'+x_cor+'"\n"'+y_cor+'"\n"ch2o"\nZONE T="Rectangular zone"\n STRANDID=0, SOLUTIONTIME=0\n I=200, J=200, K=1, ZONETYPE=Ordered\n DATAPACKING=POINT\n DT=(SINGLE SINGLE SINGLE SINGLE )\n' + content)
             f.close()
 
 
@@ -131,7 +127,7 @@ def pod_reconstruction(start, end, plane):
     进行重构
     '''
     print('# 进行缩放因子的拟合,先求缩放因子特征矩阵')
-    scale_coe = uv_matrix.T.dot(phi_velocity)
+    scale_coe = ch2o_matrix.T.dot(phi_ch2o)
     print("缩放因子特征矩阵")
     print(scale_coe)
     print('# 定义出缩放因子拟合矩阵')
@@ -152,9 +148,9 @@ def pod_reconstruction(start, end, plane):
         scale_coe_new = pd.concat(
             [scale_coe_new, scale_coe_newvector], axis=1)
     print("旧的特征速度矩阵")
-    print(phi_velocity)
+    print(phi_ch2o)
     scale_coe_new = scale_coe_new.T
-    scale_coe_new.index = list(phi_velocity)
+    scale_coe_new.index = list(phi_ch2o)
     print("拟合后的缩放因子特征矩阵")
     # 拟合之后按列排布了
     print(scale_coe_new)
@@ -162,24 +158,21 @@ def pod_reconstruction(start, end, plane):
     scale_coe_trans = scale_coe.T
     (scale_coe_trans.T).to_excel(dir_re_matrix + plane + '\\scale_coe_ori.xlsx')
     print('# 用新的缩放因子组，求出新的特征速度矩阵')
-    uv_matrix_new = phi_velocity.dot(scale_coe_new)
-    print(uv_matrix_new)
+    ch2o_matrix_new = phi_ch2o.dot(scale_coe_new)
+    print(ch2o_matrix_new)
     for mark in range(0, num_of_scale):
         re_name = dir_re_matrix + plane + '\\' + str(mark) + "-velocity.dat"
         # 求u速度特征向量
-        u_vector = (uv_matrix_new.head(end-start)[mark])
-        # 求v速度特征向量
-        v_vector = (uv_matrix_new.tail(end-start)[mark])
-        # 合并两个速度特征向量
-        pod_uv_matrix = pd.concat([u_vector, v_vector], axis=1)
+        ch2o_vector = (ch2o_matrix_new.head(end-start)[mark])
+        pod_ch2o_matrix = ch2o_vector
         # 与坐标一起合并
-        pod_matrix = pd.concat([coordinate, pod_uv_matrix], axis=1)
+        pod_matrix = pd.concat([coordinate, pod_ch2o_matrix], axis=1)
         # 保存结果
         pod_matrix.to_csv(re_name, sep=' ', index=False, header=None)
         with open(re_name, 'r+', encoding='utf-8') as f:
             content = f.read()
             f.seek(0, 0)
-            f.write('TITLE     = "Tecplot Export"\nVARIABLES = "'+x_cor+'"\n"'+y_cor+'"\n"V30"\n"V31"\nZONE T="Rectangular zone"\n STRANDID=0, SOLUTIONTIME=0\n I=200, J=200, K=1, ZONETYPE=Ordered\n DATAPACKING=POINT\n DT=(SINGLE SINGLE SINGLE SINGLE )\n' + content)
+            f.write('TITLE     = "Tecplot Export"\nVARIABLES = "'+x_cor+'"\n"'+y_cor+'"\n"ch2o"\nZONE T="Rectangular zone"\n STRANDID=0, SOLUTIONTIME=0\n I=200, J=200, K=1, ZONETYPE=Ordered\n DATAPACKING=POINT\n DT=(SINGLE SINGLE SINGLE SINGLE )\n' + content)
             f.close()
 
 
@@ -199,7 +192,15 @@ if __name__ == "__main__":
         nozzle = nozzle_folder[num1]
         dir_post_n = dir + nozzle + '\\48\\48-'
         # 定义POD结果保存位置
-        dir_pod_matrix = dir + nozzle + '\\pod_results\\'
-        dir_re_matrix = dir + nozzle + '\\pod_reconstruct\\'
+        dir_pod_matrix = dir + nozzle + '\\pod_results-ch2o\\'
+        try:
+            os.makedirs(dir_pod_matrix)
+        except:
+            pass
+        dir_re_matrix = dir + nozzle + '\\pod_reconstruct-ch2o\\'
+        try:
+            os.makedirs(dir_re_matrix)
+        except:
+            pass
         pod_decomposition_and_reconstruction()
     input("POD分解与重构已经完成")
