@@ -10,7 +10,7 @@ img = cv.imread("E:\\0-PhD\\3 nozzle\\experimental data\\flame.png")
 hsv = cv.cvtColor(img, cv.COLOR_BGR2HSV)
 
 # set the lower and upper bounds for the green hue
-lower_blue = np.array([100, 80, 46])
+lower_blue = np.array([100, 120, 70])
 upper_blue = np.array([124, 255, 255])
 
 # create a mask for green colour using inRange function
@@ -42,3 +42,5 @@ cv.imshow("res", res)
 
 if cv.waitKey(0):
     cv.destroyAllWindows()
+
+cv.imwrite("E:\\0-PhD\\3 nozzle\\experimental data\\flame-hsv.png", hsv)
